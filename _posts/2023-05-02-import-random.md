@@ -3,9 +3,7 @@ layout: post
 category: Study
 ---
 
-wfhwfevjnwoevnfjnefjnfjf
-waefwefvwanevjkwaf
-wefwjekfewkjfkwejfkwjefkjwef
+<br><br>
 
 CTF에서는 난수들의 정보를 몇 개 얻어서 다음 난수들의 정보를 알아내는 문제가 종종 출제되곤 합니다.
 
