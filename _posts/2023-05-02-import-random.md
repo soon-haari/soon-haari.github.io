@@ -1,6 +1,6 @@
 ---
 layout: post
-category: Study
+category: studies
 ---
 
 <br><br>

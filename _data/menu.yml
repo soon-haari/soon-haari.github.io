@@ -2,37 +2,38 @@
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
 entries:
-  - title: info
+  - title: choose one of the three eggs
     entries:
-      - title: a (nearly) no-CSS, fast, minimalist Jekyll theme.
-      - title: github repo
-        url: https://github.com/riggraz/no-style-please
-      - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
-
-  - title: all posts
+      - title: soon.haari.me
+        url: /
+      - title: me.soon.haari
+        url: about
+      # - title: "used by <a href='https://riggraz.dev'>riggraz.dev</a> and <a href='https://github.com/riggraz/no-style-please/network/dependents'>many others</a>"
+      - title: haari.me.soon
+        url: haarime
+  - title: recent posts
     post_list:
-      limit: 50
+      limit: 6
       show_more: true
-      show_more_text: See archive...
-      show_more_url: archive.html
+      show_more_text: see archive...
+      show_more_url: archive
 
-  - title: posts by category
+  - title: write-ups
     post_list:
-      category: example2
+      limit: 3
+      category: writeup
       show_more: true
-      show_more_text: See more posts...
-      show_more_url: example2-archive.html
-
-  - title: rss
-    url: feed.xml
+      show_more_text: see more write-ups...
+      show_more_url: writeup-archive
   
-  - title: another list
+
+  # - title: another list
+  #   entries:
+  #     - title: with subitems
+  #       entries:
+  #         - title: with subsubitems
+  #         - title: example page
+  #           url: about
+  - title: Admin's motto these days
     entries:
-      - title: with subitems
-        entries:
-          - title: with subsubitems
-          - title: example page
-            url: about
-  - title: PRO TIP
-    entries:
-      - title: to edit this menu, edit _data/menu.yml file
+      - title: Went low, went high, what matters is now
