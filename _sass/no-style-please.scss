@@ -23,11 +23,21 @@ html, body { background: white; }
 
 html { height: 100%; }
 
-@import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+@font-face {
+  font-family : 'Source Code Pro';
+  src : url('fonts/SourceCodePro-VariableFont_wght.ttf')
+}
+
+@font-face {
+  font-family : 'NotoSans';
+  src : url('fonts/NotoSansKR-Regular.otf')
+}
+
 body {
   color: black;
-  font-family: 'Nanum Gothic', sans-serif;
-  font-size: 15px;
+  font-family: 'Source Code Pro', 'NotoSans';
+  font-size: 16px;
   line-height: 1.4;
   margin: 0;
   min-height: 100%;
