@@ -3,6 +3,10 @@ layout: post
 category: Study
 ---
 
+wfhwfevjnwoevnfjnefjnfjf
+waefwefvwanevjkwaf
+wefwjekfewkjfkwejfkwjefkjwef
+
 CTF에서는 난수들의 정보를 몇 개 얻어서 다음 난수들의 정보를 알아내는 문제가 종종 출제되곤 합니다.
 
 Cryptography 분야인 만큼, 주로 Python으로 구현된 문제들이고, 구현되어 있는 random 모듈을 사용합니다. 
