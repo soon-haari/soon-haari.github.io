@@ -23,10 +23,10 @@ html, body { background: white; }
 
 html { height: 100%; }
 
-@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
 body {
   color: black;
-  font-family: 'Monaco', monospace;
+  font-family: 'Nanum Gothic', sans-serif;
   font-size: 15px;
   line-height: 1.4;
   margin: 0;
