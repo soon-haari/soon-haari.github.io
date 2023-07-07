@@ -3,6 +3,8 @@ layout: post
 category: writeup
 ---
 
+With Team "Корея! Ура!"
+
 <br><br>
 
 ## crypto - secure primeGenerator
