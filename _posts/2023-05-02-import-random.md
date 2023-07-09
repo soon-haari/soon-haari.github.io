@@ -68,9 +68,9 @@ class Random(_random.Random):
 저희에게 중요한 random.seed, random.getstate, random.setstate와 같은 함수도 super()을 사용해 더 이상 알아낼 수 있는 것이 없습니다.
 
 ```python
-	def seed(self, a=None, version=2):
+    def seed(self, a=None, version=2):
         """Initialize internal state from a seed.
-		...생략...
+        ...생략...
         """
         super().seed(a)
         self.gauss_next = None
@@ -165,7 +165,7 @@ class MT19937:
 그럼 extract과정과 twist과정 분석을 진행해야 하는데, 먼저 extract를 한 번 봐봅시다.
 
 ```python
-	def extract(self):
+    def extract(self):
         """ Extracts a 32bit word """
         if self.index >= 624:
             self.twist()

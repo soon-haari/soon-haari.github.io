@@ -48,133 +48,133 @@ def POW(r):
 
 def collect():
 
-	# io = process(["python3", "prob.py"])
-	io = remote("13.125.181.74", 9001)
+    # io = process(["python3", "prob.py"])
+    io = remote("13.125.181.74", 9001)
 
-	POW(io)
+    POW(io)
 
-	io.recvuntil("SERVER_N = ")
-	SERVER_N = int(io.recvline())
-	io.recvuntil("SERVER_E = ")
-	SERVER_E = int(io.recvline())
+    io.recvuntil("SERVER_N = ")
+    SERVER_N = int(io.recvline())
+    io.recvuntil("SERVER_E = ")
+    SERVER_E = int(io.recvline())
 
-	io.sendlineafter("> ", "0")
-	io.sendlineafter("> ", "0 -1")
-	io.sendlineafter("> ", "0 -1 -2")
-	io.sendlineafter("> ", "0 -1 -2 -3")
-	io.sendlineafter("> ", "0 -1 -2 -3 -4 -5")
-	io.sendlineafter("> ", "0 -1 -2 -3 -4 -5 -6")
+    io.sendlineafter("> ", "0")
+    io.sendlineafter("> ", "0 -1")
+    io.sendlineafter("> ", "0 -1 -2")
+    io.sendlineafter("> ", "0 -1 -2 -3")
+    io.sendlineafter("> ", "0 -1 -2 -3 -4 -5")
+    io.sendlineafter("> ", "0 -1 -2 -3 -4 -5 -6")
 
-	io.sendlineafter("> ", "1")
-	io.sendlineafter("> ", "1 -1")
-	io.sendlineafter("> ", "1 -1 -2")
-	io.sendlineafter("> ", "1 -1 -2 -3")
-	io.sendlineafter("> ", "1 -1 -2 -3 -4 -5")
-	io.sendlineafter("> ", "1 -1 -2 -3 -4 -5 -6")
+    io.sendlineafter("> ", "1")
+    io.sendlineafter("> ", "1 -1")
+    io.sendlineafter("> ", "1 -1 -2")
+    io.sendlineafter("> ", "1 -1 -2 -3")
+    io.sendlineafter("> ", "1 -1 -2 -3 -4 -5")
+    io.sendlineafter("> ", "1 -1 -2 -3 -4 -5 -6")
 
-	# io.interactive()
+    # io.interactive()
 
-	io.recvuntil("p1_enc = ")
-	p1_enc = int(io.recvline())
-	io.recvuntil("q1_enc = ")
-	q1_enc = int(io.recvline())
+    io.recvuntil("p1_enc = ")
+    p1_enc = int(io.recvline())
+    io.recvuntil("q1_enc = ")
+    q1_enc = int(io.recvline())
 
-	X = [0] * 12
-	X[0] = p1_enc * q1_enc
-	X[1] = p1_enc**2
-	X[2] = q1_enc**2
+    X = [0] * 12
+    X[0] = p1_enc * q1_enc
+    X[1] = p1_enc**2
+    X[2] = q1_enc**2
 
-	send_str = ""
-	for x in X:
-		send_str += f"{x} "
+    send_str = ""
+    for x in X:
+        send_str += f"{x} "
 
-	io.sendlineafter("> ", send_str)
+    io.sendlineafter("> ", send_str)
 
-	if io.recv(1) != b"N":
-		io.close()
-		return None
+    if io.recv(1) != b"N":
+        io.close()
+        return None
 
-	io.recvuntil(" = ")
-	N = int(io.recvline())
+    io.recvuntil(" = ")
+    N = int(io.recvline())
 
-	p1q1 = isqrt(N)
+    p1q1 = isqrt(N)
 
-	assert p1q1**2 == N
-	assert p1q1 % 30030 == 1
+    assert p1q1**2 == N
+    assert p1q1 % 30030 == 1
 
-	for _ in range(20):
-		io.recvuntil("b = ")
-		b = int(io.recvline())
+    for _ in range(20):
+        io.recvuntil("b = ")
+        b = int(io.recvline())
 
-		send = sha256(long_to_bytes(pow(b, N+1-p1q1, N))).hexdigest()
+        send = sha256(long_to_bytes(pow(b, N+1-p1q1, N))).hexdigest()
 
-		io.sendlineafter("> ", send)
-		io.recvline()
+        io.sendlineafter("> ", send)
+        io.recvline()
 
-	io.recvuntil("FLAG_ENC = ")
-	FLAG_ENC = int(io.recvline())
+    io.recvuntil("FLAG_ENC = ")
+    FLAG_ENC = int(io.recvline())
 
-	io.close()
+    io.close()
 
-	return p1q1, FLAG_ENC, N
+    return p1q1, FLAG_ENC, N
 
 if __name__ == "__main__":
-	cnt = 0
-	while 1:
-		cnt += 1
+    cnt = 0
+    while 1:
+        cnt += 1
 
-		res = collect()
-		if res == None:
-			print(f"Fail, {cnt}")
+        res = collect()
+        if res == None:
+            print(f"Fail, {cnt}")
 
-			continue
+            continue
 
-		to_ft, FLAG_ENC, N = res
+        to_ft, FLAG_ENC, N = res
 
-		ft_ = to_ft
+        ft_ = to_ft
 
-		factored = {}
+        factored = {}
 
-		for p in small_primes:
-			while ft_ % p == 0:
-				ft_ //= p
+        for p in small_primes:
+            while ft_ % p == 0:
+                ft_ //= p
 
-				if p in factored:
-					factored[p] += 2
-				else:
-					factored[p] = 2
+                if p in factored:
+                    factored[p] += 2
+                else:
+                    factored[p] = 2
 
-		if isPrime(ft_):
-			print("Nice")
-			factored[ft_] = 2
+        if isPrime(ft_):
+            print("Nice")
+            factored[ft_] = 2
 
-			chkN = 1
+            chkN = 1
 
-			for f in factored:
-				chkN *= f**factored[f]
+            for f in factored:
+                chkN *= f**factored[f]
 
-			phi = N
+            phi = N
 
-			for f in factored:
-				phi //= f
-				phi *= f - 1
+            for f in factored:
+                phi //= f
+                phi *= f - 1
 
-			assert chkN == N
+            assert chkN == N
 
-			d = pow(0x10001, -1, phi)
+            d = pow(0x10001, -1, phi)
 
-			r = random.randrange(0, 2**100)
-			assert pow(r, phi, N) == 1
-			assert pow(pow(r, 65537, N), d, N) == r
+            r = random.randrange(0, 2**100)
+            assert pow(r, phi, N) == 1
+            assert pow(pow(r, 65537, N), d, N) == r
 
-			flag = pow(FLAG_ENC, d, N)
+            flag = pow(FLAG_ENC, d, N)
 
-			print(long_to_bytes(flag))
+            print(long_to_bytes(flag))
 
-			break
+            break
 
-		else:
-			print(f"Fail, {cnt}")
+        else:
+            print(f"Fail, {cnt}")
 
 ```
 
@@ -216,8 +216,8 @@ x = PR.gens()[0]
 MOD = 0x19F2BBF3EF3A2AB6684710EB139F3A9AD
 mod = 0
 for i in range(129):
-	if (1 << i) & MOD:
-		mod += x^i
+    if (1 << i) & MOD:
+        mod += x^i
 
 # print(mod.factor())
 
@@ -229,19 +229,19 @@ order = 2^128 - 1
 logs = []
 
 for i in trange(20):
-	res = from_bytes(f.read(16))
+    res = from_bytes(f.read(16))
 
-	poly = 0
+    poly = 0
 
-	for i in range(128):
-		if (1 << i) & res:
-			poly += y^i
+    for i in range(128):
+        if (1 << i) & res:
+            poly += y^i
 
-	lg = poly.log(y)
+    lg = poly.log(y)
 
-	assert y^lg == poly
+    assert y^lg == poly
 
-	logs.append(lg)
+    logs.append(lg)
 
 print(logs)
 '''
@@ -253,10 +253,10 @@ M = Matrix(22, 22)
 weight = 2^32
 
 for i in range(20):
-	M[i, i] = 1
-	M[i, 20] = logs[i] * weight
+    M[i, i] = 1
+    M[i, 20] = logs[i] * weight
 
-	M[20, 20] += 64 * logs[i] * weight
+    M[20, 20] += 64 * logs[i] * weight
 
 M[21, 20] = (2^128 - 1) * weight
 
@@ -268,15 +268,15 @@ M = M.LLL()
 res = []
 
 for v in M:
-	if v[21] == chk:
-		for i in range(20):
-			res.append(ZZ(64 + v[i]))
+    if v[21] == chk:
+        for i in range(20):
+            res.append(ZZ(64 + v[i]))
 
 fin_chk = 0
 
 for i in range(20):
-	fin_chk += logs[i] * res[i]
-	fin_chk %= (2^128 - 1)
+    fin_chk += logs[i] * res[i]
+    fin_chk %= (2^128 - 1)
 
 assert fin_chk == 0
 
@@ -287,7 +287,7 @@ cipher = FileCipher()
 chk_poly = GF(1)
 
 for i in range(20):
-	chk_poly *= cipher.vectors[i]^res[i]
+    chk_poly *= cipher.vectors[i]^res[i]
 
 assert chk_poly.v == 1
 
@@ -347,21 +347,21 @@ server_alpha = GF.from_bytes(enc_nonce)
 local_alpha = GF.from_bytes(enc_local_nonce)
 
 for i in range(20):
-	local_alpha *= cipher.vectors[i]**index_bytes[i]
+    local_alpha *= cipher.vectors[i]**index_bytes[i]
 
 ct = b""
 
 blocks = 640
 
 for i in range(blocks):
-	block = f.read(16)
+    block = f.read(16)
 
-	to_send = local_alpha + server_alpha + GF.from_bytes(block)
+    to_send = local_alpha + server_alpha + GF.from_bytes(block)
 
-	ct += GF.to_bytes(to_send)
+    ct += GF.to_bytes(to_send)
 
-	local_alpha *= cipher.vectors[i % 20]
-	server_alpha *= cipher.vectors[i % 20]
+    local_alpha *= cipher.vectors[i % 20]
+    server_alpha *= cipher.vectors[i % 20]
 
 io = remote("13.125.18.170", 9137)
 
@@ -381,16 +381,16 @@ server_alpha = GF.from_bytes(enc_nonce)
 local_alpha = GF.from_bytes(enc_local_nonce)
 
 for i in range(20):
-	local_alpha *= cipher.vectors[i]**index_bytes[i]
+    local_alpha *= cipher.vectors[i]**index_bytes[i]
 
 for i in range(blocks):
-	blk = pt[16 * i:16 * (i + 1)]
+    blk = pt[16 * i:16 * (i + 1)]
 
-	pt_blk = local_alpha + server_alpha + GF.from_bytes(blk)
-	real_pt += GF.to_bytes(pt_blk)
+    pt_blk = local_alpha + server_alpha + GF.from_bytes(blk)
+    real_pt += GF.to_bytes(pt_blk)
 
-	local_alpha *= cipher.vectors[i % 20]
-	server_alpha *= cipher.vectors[i % 20]
+    local_alpha *= cipher.vectors[i % 20]
+    server_alpha *= cipher.vectors[i % 20]
 
 f = open("flag.png", "wb")
 f.write(real_pt)
@@ -447,75 +447,75 @@ def list_to_int(L):
     return ret
 
 def sendmul(send):
-	global tot_used
-	tot_used += len(send)
+    global tot_used
+    tot_used += len(send)
 
-	send_str = ""
-	for s in send:
-		send_str += f"{s} "
-	send_str = send_str[:-1]
+    send_str = ""
+    for s in send:
+        send_str += f"{s} "
+    send_str = send_str[:-1]
 
-	io.sendlineafter("> ", send_str)
+    io.sendlineafter("> ", send_str)
 
-	io.recvuntil("Outputs = ")
+    io.recvuntil("Outputs = ")
 
-	output = io.recvline().decode()[:-2].split(" ")
-	output = [int(o) for o in output]
+    output = io.recvline().decode()[:-2].split(" ")
+    output = [int(o) for o in output]
 
-	return output
+    return output
 
 def half(a):
-	if a % 2 == 0:
-		return a // 2
-	return (a + 17) // 2
+    if a % 2 == 0:
+        return a // 2
+    return (a + 17) // 2
 
 def sendmul_including_a(send):
-	send_a = []
-	for s in send:
-		s_list = int_to_list(s)
+    send_a = []
+    for s in send:
+        s_list = int_to_list(s)
 
-		for i in range(20):
-			s_list[i] -= half(a[i])
-			s_list[i] %= 17
+        for i in range(20):
+            s_list[i] -= half(a[i])
+            s_list[i] %= 17
 
-		send_a.append(list_to_int(s_list))
+        send_a.append(list_to_int(s_list))
 
-	return sendmul(send_a)
+    return sendmul(send_a)
 
 TEST = True
 if TEST:
-	io = process(["python3", "prob-13.py"])
+    io = process(["python3", "prob-13.py"])
 else:
-	io = remote("13.124.51.204", 6238)
+    io = remote("13.124.51.204", 6238)
 
 io.recvuntil("TARGET = ")
 target = int(io.recvline())
 
 if TEST:
-	Sbox1 = eval(io.recvline())
-	mat = eval(io.recvline())
+    Sbox1 = eval(io.recvline())
+    mat = eval(io.recvline())
 
-	# print(Sbox1)
+    # print(Sbox1)
 
-	for i in range(20):
-		for j in range(20):
-			mat[j][i] *= Sbox1[i][2]
-			mat[j][i] %= 17
+    for i in range(20):
+        for j in range(20):
+            mat[j][i] *= Sbox1[i][2]
+            mat[j][i] %= 17
 
 to_send = []
 
 payload_len = 100
 
 for _ in range(payload_len):
-	to_send.append(random.randrange(0, 17**20))
+    to_send.append(random.randrange(0, 17**20))
 
 res = sendmul(to_send)
 
 nice = []
 
 for i in range(payload_len):
-	if res[i] & 1:
-		nice.append(to_send[i])
+    if res[i] & 1:
+        nice.append(to_send[i])
 
 chk_len = len(nice)
 
@@ -524,33 +524,33 @@ possibilities = [[1] * 17 for _ in range(20)]
 a = [0] * 20
 
 for i in range(20):
-	for k in range(chk_len):
-		to_send_list = []
-		base_send = int_to_list(nice[k])
+    for k in range(chk_len):
+        to_send_list = []
+        base_send = int_to_list(nice[k])
 
-		for j in range(17):
-			to_send = base_send[:]
-			to_send[i] = j
-			to_send_list.append(list_to_int(to_send))
+        for j in range(17):
+            to_send = base_send[:]
+            to_send[i] = j
+            to_send_list.append(list_to_int(to_send))
 
-		# print(to_send_list)
+        # print(to_send_list)
 
-		res = sendmul(to_send_list)
+        res = sendmul(to_send_list)
 
-		for j in range(17):
-			if j == base_send[i]:
-				assert res[j] & 1
-				continue
+        for j in range(17):
+            if j == base_send[i]:
+                assert res[j] & 1
+                continue
 
-			if res[j] & 1 == 0:
-				idx = (-(base_send[i] + j)) % 17
-				possibilities[i][idx] = 0
+            if res[j] & 1 == 0:
+                idx = (-(base_send[i] + j)) % 17
+                possibilities[i][idx] = 0
 
-	assert sum(possibilities[i]) == 1
+    assert sum(possibilities[i]) == 1
 
-	for j in range(17):
-		if possibilities[i][j] == 1:
-			a[i] = j
+    for j in range(17):
+        if possibilities[i][j] == 1:
+            a[i] = j
 
 # print(tot_used)
 
@@ -560,97 +560,97 @@ rand_list = int_to_list(random.randrange(0, 17**20))
 print(sendmul_including_a([list_to_int(rand_list)]))
 
 for i in range(17):
-	if random.randrange(0, 2) == 0:
-		rand_list[i] = (-rand_list[i]) % 17
+    if random.randrange(0, 2) == 0:
+        rand_list[i] = (-rand_list[i]) % 17
 
 print(sendmul_including_a([list_to_int(rand_list)]))
 
 '''
 
 def find_best_diff(diffs):
-	diff_cp = diffs[:]
-	diff_cp.sort()
+    diff_cp = diffs[:]
+    diff_cp.sort()
 
-	# print(diffs)
-	# print(diff_cp)
+    # print(diffs)
+    # print(diff_cp)
 
-	mx = diff_cp[-1]
-	mx2 = diff_cp[-2]
+    mx = diff_cp[-1]
+    mx2 = diff_cp[-2]
 
-	assert mx2 * 2 < mx
-	assert 5 < mx
-	# print(mx2, mx)
+    assert mx2 * 2 < mx
+    assert 5 < mx
+    # print(mx2, mx)
 
-	for i in range(17):
-		if diffs[i] == mx:
-			assert i != 0
-			return i
+    for i in range(17):
+        if diffs[i] == mx:
+            assert i != 0
+            return i
 
 middle_mat = [[0] * 20 for _ in range(20)]
 
 for idx in range(19):
 
-	to_send = []
+    to_send = []
 
-	for i in range(81):
-		send_list = [7] * 20
-		send_list[idx] = i // 9
-		send_list[19] = i % 9
+    for i in range(81):
+        send_list = [7] * 20
+        send_list[idx] = i // 9
+        send_list[19] = i % 9
 
-		to_send.append(list_to_int(send_list))
+        to_send.append(list_to_int(send_list))
 
-	res = sendmul_including_a(to_send)
+    res = sendmul_including_a(to_send)
 
-	for bit in range(20):
+    for bit in range(20):
 
-		col = []
+        col = []
 
-		for i in range(81):
-			if res[i] & (1 << bit):
-				a_, b_ = [i // 9] + [i % 9]
-				asq = (a_**2) % 17
-				bsq = (b_**2) % 17
-				col.append([asq, bsq])
+        for i in range(81):
+            if res[i] & (1 << bit):
+                a_, b_ = [i // 9] + [i % 9]
+                asq = (a_**2) % 17
+                bsq = (b_**2) % 17
+                col.append([asq, bsq])
 
-		l_col = len(col)
+        l_col = len(col)
 
-		diffs = [0] * 17
+        diffs = [0] * 17
 
-		for i in range(l_col):
-			for j in range(i + 1, l_col):
-				diff = [(col[i][0] - col[j][0]) % 17, (col[i][1] - col[j][1]) % 17]
+        for i in range(l_col):
+            for j in range(i + 1, l_col):
+                diff = [(col[i][0] - col[j][0]) % 17, (col[i][1] - col[j][1]) % 17]
 
-				if diff[0] == 0 or diff[1] == 0:
-					continue
+                if diff[0] == 0 or diff[1] == 0:
+                    continue
 
-				diff = (pow(diff[0], -1, 17) * diff[1]) % 17
+                diff = (pow(diff[0], -1, 17) * diff[1]) % 17
 
-				diffs[diff] += 1
+                diffs[diff] += 1
 
-		# print(diffs)
+        # print(diffs)
 
-		df = find_best_diff(diffs)
+        df = find_best_diff(diffs)
 
-		middle_mat[bit][idx] = 17 - df
+        middle_mat[bit][idx] = 17 - df
 
-		middle_mat[bit][19] = 1
+        middle_mat[bit][19] = 1
 
 if TEST:
-	# print(middle_mat)
-	# print(mat)
+    # print(middle_mat)
+    # print(mat)
 
-	for i in range(20):
-		for j in range(19):
-			assert (middle_mat[i][j] * mat[i][19]) % 17 == mat[i][j]
+    for i in range(20):
+        for j in range(19):
+            assert (middle_mat[i][j] * mat[i][19]) % 17 == mat[i][j]
 
 to_send = []
 
 payload_len = 500
 
 for i in range(payload_len):
-	send = [random.randrange(0, 9) for _ in range(20)]
+    send = [random.randrange(0, 9) for _ in range(20)]
 
-	to_send.append(list_to_int(send))
+    to_send.append(list_to_int(send))
 
 res = sendmul_including_a(to_send)
 
@@ -659,58 +659,58 @@ iter_val = 1
 res_list = []
 
 for bit in range(20):
-	added = []
-	for j in range(payload_len):
-		if res[j] & (1 << bit):
-			add = 0
+    added = []
+    for j in range(payload_len):
+        if res[j] & (1 << bit):
+            add = 0
 
-			lst = int_to_list(to_send[j])
+            lst = int_to_list(to_send[j])
 
-			for k in range(20):
-				add += lst[k]**2 * middle_mat[bit][k]
-				add %= 17
+            for k in range(20):
+                add += lst[k]**2 * middle_mat[bit][k]
+                add %= 17
 
-			added.append(add)
+            added.append(add)
 
-	added = list(set(added))
-	assert len(added) <= 2
+    added = list(set(added))
+    assert len(added) <= 2
 
-	# print(added)
-	res_list.append(added)
+    # print(added)
+    res_list.append(added)
 
-	iter_val *= len(added)
+    iter_val *= len(added)
 
 middle_mat = Matrix(GF(17), middle_mat)
 mat_inv = middle_mat.inverse()
 
 for i in trange(iter_val):
-	v = vector(GF(17), 20)
+    v = vector(GF(17), 20)
 
-	bit_idx = 0
+    bit_idx = 0
 
-	for j in range(20):
-		if len(res_list[j]) == 1:
-			v[j] = res_list[j][0]
+    for j in range(20):
+        if len(res_list[j]) == 1:
+            v[j] = res_list[j][0]
 
-		else:
-			v[j] = res_list[j][(i >> bit_idx) & 1]
-			bit_idx += 1
+        else:
+            v[j] = res_list[j][(i >> bit_idx) & 1]
+            bit_idx += 1
 
-	res = mat_inv * v
+    res = mat_inv * v
 
-	chk_vals = [0, 1, 4, 9, 16, 8, 2, 15, 13]
+    chk_vals = [0, 1, 4, 9, 16, 8, 2, 15, 13]
 
-	suc = True
-	for k in res:
-		if ZZ(k) not in chk_vals:
-			suc = False
-			break
+    suc = True
+    for k in res:
+        if ZZ(k) not in chk_vals:
+            suc = False
+            break
 
-	if suc:
-		# print("Yay")
-		ans_vec = res
+    if suc:
+        # print("Yay")
+        ans_vec = res
 
-		break
+        break
 
 ssqrt = {0:0, 1:1, 4:2, 9:3, 16:4, 8:5, 2:6, 15:7, 13:8}
 
