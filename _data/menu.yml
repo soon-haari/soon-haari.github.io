@@ -34,6 +34,7 @@ entries:
   #         - title: with subsubitems
   #         - title: example page
   #           url: about
-  - title: Admin's motto these days
+  - title: admin's motto these days
     entries:
       - title: Went low, went high, what matters is now
+        url: https://open.spotify.com/track/1rIKgCH4H52lrvDcz50hS8/
