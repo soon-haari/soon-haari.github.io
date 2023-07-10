@@ -9,6 +9,10 @@ I will review a challenge in category ["CTF Archive"](https://cryptohack.org/cha
 
 I didn't categorize this post as "write-up" because I wanted "write-up" category to be filled with only CTFs I participated.
 
+This was a completely new type of challenge during my entire crypto path, and I really enjoyed it.
+
+The entire challenge required deep knowledge of linear algebra, crypto, algorithms even.
+
 <br>
 
 ### Description
@@ -485,17 +489,68 @@ S3: [3344857554155236898658903831873044678801896, 364995906978120385914247184309
 
 ## Step 3. Calculating j(n)
 
+```python
+def j(n):
+    if n < 10^4:
+        return F(sum(S3[d] for d in ZZ(n).digits(1337)))
+    return np.array([F(int(10000*np.log(31337 + i))) for i in range(100)]).dot(list(map(j, n - 10^4 + 100 - np.arange(100))))
 
+if __name__ == "__main__":
+    ...
+    print("Stage 3:")
+    print("========")
+    key = hashlib.sha256(str(j(ITERS)).encode()).digest()
+```
 
+Calculating `j` function seems obvious, because it is completely linear, and there is no `n`-polynomials like Step 2.
 
+But the problem is that the size is 10000 this time. 
 
+<br>
 
+It is not possible to construct a 10000 * 10000 matrix due to memory limits and time complexity.
 
+But using the charpoly() I mentioned in Step 1, this can be done with 10000 degreed polynomial.
 
+<br>
 
+However, constructing a matrix, and converting it into a polynomial like Step 1. is not possible, we have to directly construct the polynomial.
 
+It took some time for me to understand why does Hellman's `The Matrix Revolutions`' solution work.
 
+And fascinated the modulus polynomial is exactly equal to coefficients in the recurrence equation.
 
+```
+Pow Done.
+Mul Done.
+4884838814356754393675352922066305300889643
+```
+
+We can see `j(ITERS)`'s value is 4884838814356754393675352922066305300889643, and the challenge is finished.
+
+<br><br>
+
+In total, my solution code took around 1.5 minutes for Step 1,
+
+DLP was fast, but the final brute force part took the longest.
+
+And less than 10 seconds for Step 2 and Step 3.
+
+Here is my final solve code: [ex.sage](../files/functional/ex.sage)
+
+<br>
+
+The fact you don't even know if your ITERS and S3 is correct or not during solving makes the challenge a hundred times harder. 
+
+I always love incredibly hard challenges with short source codes.
+
+Thanks to this, I am planning to create a challenge of my own with some additional tweaks later.
+
+Huge respect to Robin, the author again.
+
+<br>
+
+Flag: `ICC{N0w_y0u_4re_a_mast3r_0f_t3h_l1n34r_r3curr3nc3s!}`
 
 
 
