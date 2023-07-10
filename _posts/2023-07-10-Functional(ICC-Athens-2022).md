@@ -536,7 +536,7 @@ DLP was fast, but the final brute force part took the longest.
 
 And less than 10 seconds for Step 2 and Step 3.
 
-Here is my final solve code: [ex.sage](../files/functional/ex.sage)
+Here is my final solve code: [ex.sage](https://github.com/soon-haari/soon-haari.github.io/blob/master/files/functional/ex.sage)
 
 <br>
 
