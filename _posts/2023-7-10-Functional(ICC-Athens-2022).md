@@ -359,15 +359,131 @@ Now we have to generate list of S3 which is defined as:
 
 ITERS' value is very large, so we have to find an efficient, especially O(logN) way to compute function `i`.
 
+(I first thought this challenge was finished after I calculated ITERS. It was not.)
 
+<br><br>
 
+Function `g`, `h`, `i` are defined as:
+- $g(n) = Cg(n - 6) + Ch(n - 2) + Ci(n - 3) + Cg(n - 3) + Ch(n - 4) + Ci(n)$
+$+ 2n^3 + 42$
+- $h(n) = Ch(n - 3) + Ci(n - 1) + Cg(n - 2) + Ch(n - 1) + n$
+- $i(n) = Ci(n - 2) + Cg(n - 3) + Ch(n - 3) + Ch(n - 1) + Ci(n - 1) + 1$
 
+I wrote every known constant value as C.
 
+<br><br>
 
+This time the goal is not the DLP, but just generalizing the function in any kind of way.
 
+And with matrix construction, that can be actually easily done,
 
+If it wasn't for additional $2n^3 + 42$, $n$, $1$.
 
+<br><br>
 
+Then how we can remove those disturbing additional tails?
+
+Gladly, I have faced these kind of question during math solving before.
+
+<br>
+
+Let's give an example of a recurrence relation.
+
+<center>$a_{n + 1} = 2a_{n} + 3$</center>
+
+How can we generalize this?
+
+We can sum up some constant number in both side to make the form equal.
+
+<center>$a_{n + 1} + 3 = 2(a_{n} + 3)$</center>
+
+Then we define $a'\_{n} = a_{n} + 3$ and $a'\_{n}$ can easily be generalized.
+
+<br><br>
+
+How about this case?
+
+<center>$b_{n + 1} = 2b_{n} + n$</center>
+
+Little bit trickier, but doable.
+
+<center>$b_{n + 1} + n + 1 = 2b_{n} + n + n + 1$</center>
+
+<center>$b_{n + 1} + (n + 1) = 2(b_{n} + n) + 1$</center>
+
+<center>$b_{n + 1} + (n + 1) + 1 = 2(b_{n} + n + 1)$</center>
+
+Finally, we can define $b'\_{n} = b_{n} + n + 1$, and $b'\_{n + 1} = 2b'\_{n}$ comes out as a result.
+
+<br><br>
+
+There are more exceptions like this, but everything is fine if we just extend the degrees of $n$s.
+
+<center>$c_{n + 1} = c_{n} + n$</center>
+
+This one is impossible with just constant, and 1 degree of $n$.
+
+<center>$c_{n + 1} - \frac{(n+1)^2}{2} = c_{n} + n- \frac{(n+1)^2}{2} = c_{n} - \frac{n^2}{2} - \frac{1}{2}$</center>
+
+<center>$c_{n + 1} - \frac{(n+1)^2}{2} + \frac{n + 1}{2} = c_{n} - \frac{n^2}{2} + \frac{n}{2}$</center>
+
+<br>
+
+<center>$c'_{n} = c_{n} - \frac{n^2}{2} + \frac{n}{2} = constant$</center>
+
+<br><br>
+
+So the conclusion is, by defining $g'\_{n} = g_{n} + dn^3 + cn^2 + bn + a$,
+
+and `h`, `i` as well, we can remove all the polynomial tails of $n$.
+
+(If that doesn't have a solution, we can always add $en^4$, but until $dn^3$ worked fine.)
+
+We have 4 coefficients per function, so total 12 variables.
+
+<br>
+
+Because no any other variables are multiplied, and 2 or more coefficients are never multiplied to each other,
+
+finding those coefficients is easy as solving 12 linear equations with 12 variables.
+
+<br><br>
+
+After that, when we finally have recurrence relations as perfectly linear equations,
+
+we can construct matrix equations, but with a little sense.
+
+<br>
+
+Unlike step 1, we have 3 functions now.
+
+So we just have to set the old vector with 
+
+`g(n - 5 ~ n), h(n - 5 ~ n), i(n - 5 ~ n)`
+
+and the new vector with 
+
+`g(n - 4 ~ n + 1), h(n - 4 ~ n + 1), i(n - 4 ~ n + 1)`
+
+Middle matrix has to be 18 * 18 of size.
+
+<br>
+
+By the way, `g(n)` including `i(n)` itself was very disturbing,
+so I decided to put `i(n)`'s recurrence directly into `g(n)`.
+
+Theory for Step 2. is already extremely difficult, but implementing this in code is just another level LOL.
+
+<br>
+
+Front two values of S3 resulted as:
+```
+S3: [3344857554155236898658903831873044678801896, 3649959069781203859142471843095989397157559]
+```
+
+<br><br><br>
+
+## Step 3. Calculating j(n)
 
 
 
