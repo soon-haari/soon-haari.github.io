@@ -1,6 +1,7 @@
 ---
 layout: post
 category: studies
+permalink: /integral-of-1-x5-1
 ---
 
 <br><br>
@@ -92,19 +93,19 @@ R.<a, b> = PolynomialRing(QQ, 'a, b')
 coefs = [1, 0, 0, 0, 0]
 
 for i in range(1, 5):
-	new_coefs = [0] * 5
+    new_coefs = [0] * 5
 
-	for j in range(i):
-		# 1 / (x - ab^j)(x - ab^i)
-		# i > j
-		
-		# = 1 / (ab^j - ab^i) * 1 / (x - ab^j)
-		# + 1 / (ab^i - ab^j) * 1 / (x - ab^i)
+    for j in range(i):
+        # 1 / (x - ab^j)(x - ab^i)
+        # i > j
+        
+        # = 1 / (ab^j - ab^i) * 1 / (x - ab^j)
+        # + 1 / (ab^i - ab^j) * 1 / (x - ab^i)
 
-		new_coefs[j] += 1 / (a * b^j - a * b^i) * coefs[j]
-		new_coefs[i] += 1 / (a * b^i - a * b^j) * coefs[j]
+        new_coefs[j] += 1 / (a * b^j - a * b^i) * coefs[j]
+        new_coefs[i] += 1 / (a * b^i - a * b^j) * coefs[j]
 
-	coefs = new_coefs
+    coefs = new_coefs
 
 print(coefs)
 ```
@@ -129,19 +130,19 @@ b = a^2
 coefs = [1, 0, 0, 0, 0]
 
 for i in range(1, 5):
-	new_coefs = [0] * 5
+    new_coefs = [0] * 5
 
-	for j in range(i):
-		# 1 / (x - ab^j)(x - ab^i)
-		# i > j
-		
-		# = 1 / (ab^j - ab^i) * 1 / (x - ab^j)
-		# + 1 / (ab^i - ab^j) * 1 / (x - ab^i)
+    for j in range(i):
+        # 1 / (x - ab^j)(x - ab^i)
+        # i > j
+        
+        # = 1 / (ab^j - ab^i) * 1 / (x - ab^j)
+        # + 1 / (ab^i - ab^j) * 1 / (x - ab^i)
 
-		new_coefs[j] += 1 / (a * b^j - a * b^i) * coefs[j]
-		new_coefs[i] += 1 / (a * b^i - a * b^j) * coefs[j]
+        new_coefs[j] += 1 / (a * b^j - a * b^i) * coefs[j]
+        new_coefs[i] += 1 / (a * b^i - a * b^j) * coefs[j]
 
-	coefs = new_coefs
+    coefs = new_coefs
 
 print(coefs)
 ```
@@ -188,7 +189,7 @@ A, B = 0, 1
 ans = 0
 
 for i in range(5):
-	ans += coefs[i] * (ln(B - a * b^i) - ln(A - a * b^i))
+    ans += coefs[i] * (ln(B - a * b^i) - ln(A - a * b^i))
 
 print(ans)
 ```
@@ -227,7 +228,7 @@ A, B = 0, 1
 ans = 0
 
 for i in range(5):
-	ans += coefs[i] * (ln(B - a * b^i) - ln(A - a * b^i))
+    ans += coefs[i] * (ln(B - a * b^i) - ln(A - a * b^i))
 
 print(ans)
 ```
