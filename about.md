@@ -22,6 +22,7 @@ School:
 Team:
 - CyKor
 - thehackerscrew (Former)
+- cat :flag_kr:
 
 Contact:
 - [Email](mailto:alstns.040422@gmail.com/)
