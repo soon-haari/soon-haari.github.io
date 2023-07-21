@@ -406,7 +406,7 @@ Note: `SusCipher._perm_inv` isn't implemented, so I had to implement it myself w
 [29404.817000000727, 30679.350000000642, ... 30124.760000000537, 14848.692999999996, 29970.971000000598, ... 30145.086000000614, 30154.163000000608]
 ```
 
-Most of them has similar results, but exactly one has the values of half compared to others.
+Most of them has similar results, but exactly one has the value of half compared to others.
 
 Which is a good news.
 
@@ -436,7 +436,7 @@ But again, thought why it wouldn't?
 
 <br>
 
-I think this is appliable for all kind of low-round ciphers, with lots of `0`s in output differtial.
+I think this is appliable for all kind of low-round ciphers, with lots of `0`s in output differential.
 
 If I solved this one during the Quals, I would have scored `990`, which is a nice rank in Korea.
 
