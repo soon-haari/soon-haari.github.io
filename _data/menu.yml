@@ -1,6 +1,7 @@
 # For documentation on this file, see:
 # https://github.com/riggraz/no-style-please#customize-the-menu
 
+
 entries:
   - title: choose one of the three eggs
     entries:
@@ -36,5 +37,7 @@ entries:
   #           url: about
   - title: admin's message
     entries:
-      - title: 어어어 푸푸푸 또 허허허 우우우적 거거거 리더던 시 저저절 나라면 
+      - title: 어어어 푸푸푸 또 허허허 우우우적 거거거 리더던 시 저저절 나라면
         url: https://open.spotify.com/track/1IJxbEXfgiKuRx6oXMX87e
+
+        
