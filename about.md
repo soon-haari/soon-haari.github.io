@@ -43,3 +43,4 @@ CTF Results:
 - 2023 Codegate(Uni) Finalist (Team: Корея! Ура!)
 - 2023 Crypto CTF 9th (All Clear) (Team: soon_haari솔플with beer)
 - 2023 zer0pts CTF 2nd (Team: CyKor)
+- 2023 corCTF 3nd (Team: cat :flag_kr:)
