@@ -40,7 +40,7 @@ CTF Results:
 - 2023 Hacktheon 4th (3000$) (Team: 사이코우스시)
 - 2023 Midnight Sun CTF Finalist (Team: CyKor)
 - 2023 CCE(Gen) Finalist (Team: 02vs04)
-- 2023 Codegate(Uni) Finalist (Team: Корея! Ура!)
+- 2023 Codegate(Uni) 2nd (Team: Корея! Ура!)
 - 2023 Crypto CTF 9th (All Clear) (Team: soon_haari솔플with beer)
 - 2023 zer0pts CTF 2nd (Team: CyKor)
 - 2023 corCTF 3rd (Team: cat :flag_kr:)
