@@ -21,8 +21,9 @@ School:
 
 Team:
 - CyKor
+- Super Guesser
 - thehackerscrew (Former)
-- cat :flag_kr:
+- cat :flag_kr: (Former)
 
 Contact:
 - [Email](mailto:alstns.040422@gmail.com/)
