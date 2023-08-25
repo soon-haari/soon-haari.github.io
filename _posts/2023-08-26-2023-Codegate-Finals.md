@@ -27,8 +27,8 @@ Thankfully, he also explained my solution for Task 1 too.
 
 <br><br>
 
-Here is my solve code: [Solve](/files)
+Here is my solve code: [Solve](https://github.com/soon-haari/soon-haari.github.io/tree/master/files/codegatefinals/solve)
 
-`ex.py` to solve, and the code for generating the seed is in `mersenne` folder.
+`ex.sage` to solve, and the code for generating the seed is in `mersenne` folder.
 
 Thanks `rkm0959` for the challenge, but moreover, really thanks to my teammates `jinh`, `justlikebono`, `sqrtrev`.
