@@ -34,14 +34,15 @@ Contact:
 
 CTF Results:
 - 2022 CCE(Gen) Finalist (Team: 대형신인)
-- 2022 Christmas CTF 3rd (1000$) (Team: Sechack여친구함)
-- 2022 HSpace CTF the FIRST, Uni div crypto 1st (200$ worth)
+- 2022 Christmas CTF 3rd (Team: Sechack여친구함)
+- 2022 HSpace CTF the FIRST, Uni div Crypto 1st
 <br><br>
 - 2023 ACSC Quals Korea 8th 
-- 2023 Hacktheon 4th (3000$) (Team: 사이코우스시)
+- 2023 Hacktheon 4th (Team: 사이코우스시)
 - 2023 Midnight Sun CTF Finalist (Team: CyKor)
 - 2023 CCE(Gen) Finalist (Team: 02vs04)
 - 2023 Codegate(Uni) 2nd (Team: Корея! Ура!)
 - 2023 Crypto CTF 9th (All Clear) (Team: soon_haari솔플with beer)
 - 2023 zer0pts CTF 2nd (Team: CyKor)
 - 2023 corCTF 3rd (Team: cat :flag_kr:)
+- 2023 WACon(Gen) Finalist (Team: 사이코랑)
