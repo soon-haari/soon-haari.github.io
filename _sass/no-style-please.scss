@@ -34,6 +34,12 @@ html { height: 100%; }
   src : url('fonts/NotoSansKR-Regular.otf')
 }
 
+@font-face {
+  font-family : 'Menlo';
+  src : url('fonts/Menlo-Regular.ttf')
+}
+
+
 body {
   color: black;
   font-family: 'Source Code Pro', 'NotoSans';
@@ -79,7 +85,8 @@ table, th, td {
 }
 
 code {
-  font-size: 14px;
+  font-family: 'Menlo';
+  font-size: 13px;
   color: black;
   background: rgb(200, 200, 200);
 }
