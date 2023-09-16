@@ -47,7 +47,7 @@ CTF Results:
 - 2023 corCTF 3rd (Team: [cat :flag_kr:](https://ctftime.org/team/238578))
 - 2023 WACon(Gen) Finalist (Team: [사이코랑](/team/cykorang))
 - 2023 HITCON Finalist (Team: [Super Guesser](https://ctftime.org/team/130817))
-
+- 2023 Whitehat(Gen) Finalist (Team: [캥거루주머니뜨개질동호회](/team/kangaroo))
 
 
 
