@@ -17,7 +17,7 @@ var today = new Date(year, month - 1, day);
 diff_time = today.getTime() - gift.getTime()
 diff_date = diff_time / (1000 * 60 * 60 * 24)
 
-p.innerHTML = `08/26<br><br>💚💚<br><br>D + ${diff_date}`;
+p.innerHTML = `08/26<br><br>💚💚<br><br>D + ${diff_date + 1}`;
 //p.innerHTML = `${today} ${gift}`
 document.body.append(p);
 

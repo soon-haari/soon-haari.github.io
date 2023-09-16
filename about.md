@@ -33,17 +33,23 @@ Contact:
 - [Twitter](https://twitter.com/___ahpuh)
 
 CTF Results:
-- 2022 CCE(Gen) Finalist (Team: 대형신인)
-- 2022 Christmas CTF 3rd (Team: Sechack여친구함)
+- 2022 CCE(Gen) Finalist (Team: [대형신인](/team/bignew))
+- 2022 Christmas CTF 3rd (Team: [Sechack여친구함](/team/sechackgf))
 - 2022 HSpace CTF the FIRST, Uni div Crypto 1st
 <br><br>
 - 2023 ACSC Quals Korea 8th 
-- 2023 Hacktheon 4th (Team: 사이코우스시)
-- 2023 Midnight Sun CTF Finalist (Team: CyKor)
-- 2023 CCE(Gen) Finalist (Team: 02vs04)
-- 2023 Codegate(Uni) 2nd (Team: Корея! Ура!)
-- 2023 Crypto CTF 9th (All Clear) (Team: soon_haari s. p. w. b.)
-- 2023 zer0pts CTF 2nd (Team: CyKor)
-- 2023 corCTF 3rd (Team: cat :flag_kr:)
-- 2023 WACon(Gen) Finalist (Team: 사이코랑)
-- 2023 HITCON Finalist (Team: Super Guesser)
+- 2023 Hacktheon 4th (Team: [사이코우스시](/team/sushi))
+- 2023 Midnight Sun CTF Finalist (Team: [CyKor](/team/cykor_mid_final))
+- 2023 CCE(Gen) Finalist (Team: [02vs04](/team/02vs04))
+- 2023 Codegate(Uni) 2nd (Team: [Корея! Ура!](/team/koreaypa))
+- 2023 Crypto CTF 9th (All Clear) (Team: [soon_haari s. p. w. b.](/team/soon_haari_solo_play_with_beer_hahahaahahahahahaah))
+- 2023 zer0pts CTF 2nd (Team: [CyKor](https://ctftime.org/team/369))
+- 2023 corCTF 3rd (Team: [cat :flag_kr:](https://ctftime.org/team/238578))
+- 2023 WACon(Gen) Finalist (Team: [사이코랑](/team/cykorang))
+- 2023 HITCON Finalist (Team: [Super Guesser](https://ctftime.org/team/130817))
+
+
+
+
+
+
