@@ -11,6 +11,8 @@ Name: 김민순(Minsun Kim)
 
 Birth: 2004.04.22
 
+Currently working at [theori.io](https://theori.io)
+
 <br>
 
 School:
@@ -34,7 +36,6 @@ Contact:
 
 CTF Results:
 - 2022 CCE(Gen) Finalist (Team: [대형신인](/team/bignew))
-- 2022 Christmas CTF 3rd (Team: [Sechack여친구함](/team/sechackgf))
 - 2022 HSpace CTF the FIRST, Uni div Crypto 1st
 <br><br>
 - 2023 ACSC Quals Korea 8th 
