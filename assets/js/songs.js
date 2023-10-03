@@ -1,7 +1,7 @@
 const p = document.createElement("to_append");
 
 let songs = [
-	['cat flag', "/flag"],
+	["cat flag", "/flag"],
 	//0
 	["어어어 어어어 푸푸푸 또 허허허 우우우적 거거거 리더던 시 저저절 나라면", "https://open.spotify.com/track/1IJxbEXfgiKuRx6oXMX87e"],
 	["Wonder why connected feelings lingering to us", "https://open.spotify.com/track/3cqZ2Vsxt5Gi5ZLx3h5DAW"],
@@ -23,12 +23,20 @@ let songs = [
 	//15
 	["I really like it here in your arms", "https://open.spotify.com/track/6dquCx5KAW5jCgGgoTlghL"],
 	["But baby, watch me freak out", "https://open.spotify.com/track/1CmlXPPNDBi7gjx3N2BhGP"],
-	["'어디긴 니 마음이지'라는 본심을", "https://open.spotify.com/track/5tEouf2s1SPwAIkOHnvWtQ"]
+	["'어디긴 니 마음이지'라는 본심을", "https://open.spotify.com/track/5tEouf2s1SPwAIkOHnvWtQ"],
+	["I can't get you off my mind", "https://open.spotify.com/track/1qEmFfgcLObUfQm0j1W2CK"],
 
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
 link = song[1]
 name = song[0]
+
+if (name == "cat flag"){
+	name = "🚩 " + "cat flag" + " 🚩"
+}
+else{
+	name = "♪ " + name + " ♫"
+}
 
 p.innerHTML = `<ul><li><a href = "${link}"}>${name}</a></li></ul>`;
 
