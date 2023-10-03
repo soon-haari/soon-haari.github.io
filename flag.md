@@ -1,3 +1,2 @@
 ---
----
-soon_haari{W0w_fl4g_iss_ev3rywh3re__!!!!!EEEE}
+flag{2547a3afd7b1b561436f6e0bd12b65b2e4c168a447d7e352062c183498f3587566e9d7a46ac0294f26f0c7168695ce52fdd96b4f983f5866fd9dcea23984a67a}
