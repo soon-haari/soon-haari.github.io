@@ -25,6 +25,20 @@ let songs = [
 	["But baby, watch me freak out", "https://open.spotify.com/track/1CmlXPPNDBi7gjx3N2BhGP"],
 	["'어디긴 니 마음이지'라는 본심을", "https://open.spotify.com/track/5tEouf2s1SPwAIkOHnvWtQ"],
 	["I can't get you off my mind", "https://open.spotify.com/track/1qEmFfgcLObUfQm0j1W2CK"],
+	["지금 데리러 갈게 집에 가지 말고 있어줘", "https://open.spotify.com/track/6Qm8MRcsr9VlRIGf1AJ1W5"],
+	//20
+	["I wonder what it's like to be loved by you", "https://open.spotify.com/track/5KCbr5ndeby4y4ggthdiAb"],
+	["아 주술회전 밀린거 다 봐야되는데", "https://open.spotify.com/track/7kRKlFCFLAUwt43HWtauhX"],
+	["그게 나쁘던 좋던 말야", "https://open.spotify.com/track/6ZY5lLjDmK6Bzon5vseYLn"],
+	["지겨워 난 누가? 네가 짖고 있나 으으음", "https://open.spotify.com/track/7EXHK5NtyxsOeVGBA42peN"],
+	["When you're gone, how can I even try to go on?", "https://open.spotify.com/track/5pMmWfuL0FTGshYt7HVJ8P"],
+	//25
+	["Now payback is a bad bitch", "https://open.spotify.com/track/0yvPEnB032fojLfVluFjUv"],
+	["When I buy that first beer, I'll be a goddamn hero", "https://open.spotify.com/track/6JnzJBNp3adsyI3r0McKcR"],
+	["너를 처음 바라본 순간 나도 모르게", "https://open.spotify.com/track/0ziY7wJn4xAdWdEaI6tVds"],
+	["Put your wings on me, wings on me", "https://open.spotify.com/track/3RiPr603aXAoi4GHyXx0uy"],
+	["When all you do is walk the other way?", "https://open.spotify.com/track/3Fj47GNK2kUF0uaEDgXLaD"],
+	//30
 
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
@@ -32,7 +46,7 @@ link = song[1]
 name = song[0]
 
 if (name == "cat flag"){
-	name = "🚩 " + "cat flag" + " 🚩"
+	name = "🚩 " + name + " 🚩"
 }
 else{
 	name = "♪ " + name + " ♫"
