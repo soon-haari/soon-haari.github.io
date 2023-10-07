@@ -39,6 +39,13 @@ let songs = [
 	["Put your wings on me, wings on me", "https://open.spotify.com/track/3RiPr603aXAoi4GHyXx0uy"],
 	["When all you do is walk the other way?", "https://open.spotify.com/track/3Fj47GNK2kUF0uaEDgXLaD"],
 	//30
+	["잠깐이면 돼 잠깐이면", "https://open.spotify.com/track/1Z8I2cvV9JQZqB1YA0O3PY"],
+	["You don't make it easy, no no", "https://open.spotify.com/track/3KkXRkHbMCARz0aVfEt68P"],
+	["from my arms into the", "https://open.spotify.com/track/7kEva2rxsNMn07fyfZMRRn"],
+	["Cause the players gonna play, play, play, play, play", "https://open.spotify.com/track/0cqRj7pUJDkTCEsJkx8snD"],
+	["'Cause I felt sad love, I felt bad love, Sometimes happy love, Turns into givin' up", "https://open.spotify.com/track/7aGyRfJWtLqgJaZoG9lJhE"],
+	//35
+	["We could be the king and queen if you want to", "https://open.spotify.com/track/2djTXG5iBTGbDLx01njwIn"],
 
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
