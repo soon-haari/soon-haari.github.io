@@ -111,7 +111,7 @@ In the other form, so that we can extract information from the result, `bin(i)[:
 
 But 0 and 255 doesn't satisfy that property. Instead, `bin(i)[:4] ^ bin(i)[4:] == 0b0000` for those 2 exceptional cases.
 
-Fortuately, all 4 bits of `0b1111` and `0b0000` are equal, so we can extract 3 bits of information from that.
+Fortunately, all 4 bits of `0b1111` and `0b0000` are equal, so we can extract 3 bits of information from that.
 
 My implementation looks like:
 ```python
