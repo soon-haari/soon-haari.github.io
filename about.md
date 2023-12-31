@@ -15,24 +15,25 @@ Currently working at [theori.io](https://theori.io)
 
 <br>
 
-School:
-- Eulji Elementry School&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;~ 2016)
-- Bulam Middle School&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2017 ~ 2018)
-- Seoul Science High School&nbsp;&nbsp;(2019 ~ 2021)
-- Korea University&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(2022 ~&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
-
-Team:
-- CyKor
-- Super Guesser
-- thehackerscrew (Former)
-- cat :flag_kr: (Former)
-
 Contact:
 - [Email](mailto:alstns.040422@gmail.com/)
-- 010-6641-4372
 - [Discord](http://discordapp.com/users/754753564487843861/)
-- [Instagram](https://www.instagram.com/soon_haari/)
 - [Twitter](https://twitter.com/___ahpuh)
+
+School:
+- Korea University (2022 ~ Current)
+
+Experiences:
+- Theori Dreamhack Intern Researcher (2023.09 ~ Current)
+
+<br><br>
+
+Organized CTFs:
+- 2023 Christmas CTF - Christmas tree seedling
+
+CTF Team:
+- CyKor
+- Super Guesser
 
 CTF Results:
 - 2022 CCE(Gen) Finalist (Team: [대형신인](/team/bignew))
