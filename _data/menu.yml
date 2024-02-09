@@ -25,7 +25,8 @@ entries:
       show_more: true
       show_more_text: see more write-ups...
       show_more_url: writeup-archive
-  
+
+  - title: admin's message
 
   # - title: another list
   #   entries:

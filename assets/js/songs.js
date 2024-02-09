@@ -1,4 +1,5 @@
-const p = document.createElement("to_append");
+// These songs are exactly in my playlist.
+// https://open.spotify.com/playlist/1W9ljrnbLjtPHyOCxuopnf
 
 let songs = [
 	["cat flag", "/flag"],
@@ -46,7 +47,17 @@ let songs = [
 	["'Cause I felt sad love, I felt bad love, Sometimes happy love, Turns into givin' up", "https://open.spotify.com/track/7aGyRfJWtLqgJaZoG9lJhE"],
 	//35
 	["We could be the king and queen if you want to", "https://open.spotify.com/track/2djTXG5iBTGbDLx01njwIn"],
-
+	["When all inside you burn like a star", "https://open.spotify.com/track/0LD0K8ZYI0KNe4qN43Ofr7"],
+	["But I got over it and I said", "https://open.spotify.com/track/4j6kId9QIqhoXvqHKgSKa0"],
+	["I say we sound better than you or me", "https://open.spotify.com/track/4k5UZm89ZX0YAHUp55zpt9"],
+	["This is a low flying panic attack", "https://open.spotify.com/track/3DpuYpzkvUWXbmzCm6pfzR"],
+	//40
+	["Think I lost my mind, reality's so hard to find", "https://open.spotify.com/track/2hwOoMtWPtTSSn6WHV7Vp5"],
+	["Maybe I struggled by the lines and I don't need to say", "https://open.spotify.com/track/4Wi5YeExODRDiBlaIEGl7c"],
+	["And you showin' off, but it's alright", "https://open.spotify.com/track/3CA9pLiwRIGtUBiMjbZmRw"],
+	["You remind me of the color blue", "https://open.spotify.com/track/1OubIZ0ARYCUq5kceYUQiO"],
+	["'Cause we could stay at home and watch the sunset", "https://open.spotify.com/track/57RA3JGafJm5zRtKJiKPIm"],
+	//45
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
 link = song[1]
@@ -59,6 +70,7 @@ else{
 	name = "♪ " + name + " ♫"
 }
 
-p.innerHTML = `<ul><li><a href = "${link}"}>${name}</a></li></ul>`;
+const p = document.createElement("to_append");
+p.innerHTML = `<ul><li><a href = "${link}" target="_blank">${name}</a></li></ul>`;
 
-document.body.children[0].children[0].children[2].append(p)
+document.body.children[0].children[0].children[1].append(p)
