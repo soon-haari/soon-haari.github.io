@@ -9,7 +9,7 @@ SlyFizzbuzz를 공부하여서 100번 연속 Slyfizz의 무빙을 맞춰보세�
 
 `nc haari.me 1013`
 
-[public](../public/slyfizzbuzz.zip)
-[github](https://github.com/soon-haari/my-ctf-challenges/tree/main/2023-hspace-league/slyfizzbuzz)
+[Public](../public/slyfizzbuzz.zip)
+[GitHub](https://github.com/soon-haari/my-ctf-challenges/tree/main/2023-hspace-league/slyfizzbuzz)
 
 `flag sha256sum: 9dde9a9b10c5c1aec9e0b99c3c86a7b35ecb1917db9cc0bc3d2ead6dfa0b1f26`
