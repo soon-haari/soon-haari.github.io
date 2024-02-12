@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Slyfizzbuzz(hspace Ctf)</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.4" />
+<meta property="og:title" content="Slyfizzbuzz(hspace Ctf)" />
+<meta name="author" content="김민순" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="I co-authored a challenge with ks for Hspace CTF, which was Belluminar-type." />
+<meta property="og:description" content="I co-authored a challenge with ks for Hspace CTF, which was Belluminar-type." />
+<link rel="canonical" href="http://localhost:4000/slyfizzbuzz-hspace-ctf/" />
+<meta property="og:url" content="http://localhost:4000/slyfizzbuzz-hspace-ctf/" />
+<meta property="og:site_name" content="I’m such a good surfer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-11-06T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Slyfizzbuzz(hspace Ctf)" />
+<script type="application/ld+json">
+{"description":"I co-authored a challenge with ks for Hspace CTF, which was Belluminar-type.","url":"http://localhost:4000/slyfizzbuzz-hspace-ctf/","@type":"BlogPosting","headline":"Slyfizzbuzz(hspace Ctf)","dateModified":"2023-11-06T00:00:00+09:00","datePublished":"2023-11-06T00:00:00+09:00","author":{"@type":"Person","name":"김민순"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/slyfizzbuzz-hspace-ctf/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="I&apos;m such a good surfer" /><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/logo.png" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body a="dark">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <a href="/">cd ..</a><article>
+  <p class="post-meta">
+    <font size="2em">soon_haari</font>
+    <time datetime="2023-11-06 00:00:00 +0900">2023-11-06</time>
+  </p>
+  
+  <h1>Slyfizzbuzz(hspace Ctf)</h1>
+
+  <p>I co-authored a challenge with <code class="language-plaintext highlighter-rouge">ks</code> for Hspace CTF, which was Belluminar-type.</p>
+
+<p>No team solved it during the CTF, but <code class="language-plaintext highlighter-rouge">Jinseo Kim</code> and <code class="language-plaintext highlighter-rouge">diff</code> from <code class="language-plaintext highlighter-rouge">GoN</code> solved it after the CTF ended.</p>
+
+<h3 id="description">Description</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FizzBuzz라는 게임을 아시나요? 감사하게도, Slyfizz께서 살신성인(殺身成仁)을 통해 이 챌린지의 마스코트가 되어 주셨습니다!
+
+SlyFizzbuzz를 공부하여서 100번 연속 Slyfizz의 무빙을 맞춰보세요!
+
+nc x.x.x.x 1013
+</code></pre></div></div>
+
+<h3 id="challpy">chall.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">FLAG</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="s">"sly"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fb</span> <span class="o">+=</span> <span class="s">"fizz"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fb</span> <span class="o">+=</span> <span class="s">"buzz"</span>
+    <span class="k">return</span> <span class="n">fb</span>
+
+<span class="k">for</span> <span class="n">rounds</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">cmd</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="s">"roll"</span><span class="p">:</span>
+        <span class="n">dice</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">fizzbuzz</span><span class="p">(</span><span class="n">dice</span><span class="p">))</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+            <span class="k">assert</span> <span class="n">fizzbuzz</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">8</span><span class="p">))</span> <span class="o">==</span> <span class="nb">input</span><span class="p">(</span><span class="s">"Guess&gt; "</span><span class="p">)</span>
+        <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">exit</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Here is your flag: </span><span class="si">{</span><span class="n">FLAG</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The challenge extracts <code class="language-plaintext highlighter-rouge">random.getrandbits(8)</code>, and tell us if the number is multiple of 3 or multiple of 5. Which is not much different from the original <a href="https://en.wikipedia.org/wiki/Fizz_buzz">Fizzbuzz</a> game.</p>
+
+<p>The goal is to recover the state, and predict <code class="language-plaintext highlighter-rouge">random.getrandbits(8)</code>’s slyfizzbuzz result 100 times.</p>
+
+<p>If you are familiar with Python’s random, which is implemented with the Mersenne Twister, you probably know that we can recover the twister’s state if we can calculate 19937 bits from the output.</p>
+
+<p><br /></p>
+
+<p>If any of the quotients was an even number, and the multiple flag is set to <em>True</em>, we can easily know that one LSB is equal to zero, because it is an even number. And easily recover one bit. Unfortunately, 3 and 5 is both an odd number.</p>
+
+<p><br /></p>
+
+<p>The output <code class="language-plaintext highlighter-rouge">"slyfizzbuzz"</code> happens around in 1/15 probability, because the number has to be a multiple of 15.</p>
+
+<p>Let’s observe those numbers within <code class="language-plaintext highlighter-rouge">range(0, 256)</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">256</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">15</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bin_str</span> <span class="o">=</span> <span class="nb">bin</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">2</span><span class="p">:]</span>
+        <span class="n">bin_str</span> <span class="o">=</span> <span class="s">"0"</span> <span class="o">*</span> <span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">bin_str</span><span class="p">))</span> <span class="o">+</span> <span class="n">bin_str</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">bin_str</span> <span class="o">+</span> <span class="sa">f</span><span class="s">": </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>00000000: 0
+00001111: 15
+00011110: 30
+00101101: 45
+00111100: 60
+01001011: 75
+01011010: 90
+01101001: 105
+01111000: 120
+10000111: 135
+10010110: 150
+10100101: 165
+10110100: 180
+11000011: 195
+11010010: 210
+11100001: 225
+11110000: 240
+11111111: 255
+</code></pre></div></div>
+
+<p>Except for 0 and 255, those numbers have an interesting common property.</p>
+
+<p>Sum of upper 4 bits and lower 4 bits is always equal to <code class="language-plaintext highlighter-rouge">0b1111</code>.</p>
+
+<p><br /></p>
+
+<p>This interesting property happens because 15 is exactly one less than 16.</p>
+
+<p>By adding 15 from the previous number, it adds 1 to upper 4 bits, and subtracts 1 from lower 4 bits.</p>
+
+<p>So until <code class="language-plaintext highlighter-rouge">0b11110000</code>, the sum of both 4 bits remains <code class="language-plaintext highlighter-rouge">0b1111</code>.</p>
+
+<p>In the other form, so that we can extract information from the result, <code class="language-plaintext highlighter-rouge">bin(i)[:4] ^ bin(i)[4:] == 0b1111</code>.</p>
+
+<p>(<code class="language-plaintext highlighter-rouge">^</code> means XOR here.)</p>
+
+<p><br /></p>
+
+<p>But 0 and 255 doesn’t satisfy that property. Instead, <code class="language-plaintext highlighter-rouge">bin(i)[:4] ^ bin(i)[4:] == 0b0000</code> for those 2 exceptional cases.</p>
+
+<p>Fortunately, all 4 bits of <code class="language-plaintext highlighter-rouge">0b1111</code> and <code class="language-plaintext highlighter-rouge">0b0000</code> are equal, so we can extract 3 bits of information from that.</p>
+
+<p>My implementation looks like:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">diff</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">dat</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">dat</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+<span class="n">diff</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">diff</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+<span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>There are 18 multiples of 15 in <code class="language-plaintext highlighter-rouge">range(0, 256)</code> so the probability is 18/256. And we can get 3 bits of information from that.</p>
+
+<p>On average, given 100000 - 1 results, around 21093.5 bits of information is recieved, which is sufficient to recover the Mersenne Twister state.</p>
+
+<p><br /></p>
+
+<p>If we only insert information bits of 0 instead of 1, the correct state, and the zero state(which all bits are 0) always coexist.</p>
+
+<p>The correct one can be selected manually, but the easier(and much correcter, is that even a word?) way is to set the initial state before inserting bits.</p>
+
+<p>Since every initial random state works with seed, twister’s index is equal to 624, and first value of twister is equal to <code class="language-plaintext highlighter-rouge">0x80000000</code>. You don’t believe me?</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Python 3.11.1 (v3.11.1:a7a450f84a, Dec  6 2022, 15:24:06) [Clang 13.0.0 (clang-1300.0.29.30)] on darwin
+Type "help", "copyright", "credits" or "license" for more information.
+&gt;&gt;&gt; import random
+&gt;&gt;&gt; random.getstate()[1][0]
+2147483648
+&gt;&gt;&gt;
+</code></pre></div></div>
+
+<p>So we set the initial state with the code below.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">twister</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">()</span>
+<span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">()</span>
+
+<span class="n">twister</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">624</span>
+
+<span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">twister</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">):</span>
+    <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">twister</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>This is my final solve code.</p>
+
+<p>It should take less than 15 minutes on most laptops.</p>
+
+<h3 id="expy">ex.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">Twister</span><span class="p">:</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">624</span>
+    <span class="n">M</span> <span class="o">=</span> <span class="mi">397</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="mh">0x9908b0df</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">[</span> <span class="p">[</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="mi">32</span> <span class="o">*</span> <span class="n">i</span> <span class="o">+</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="n">j</span><span class="p">)))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">624</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">_xor</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="o">^</span> <span class="n">y</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)]</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">_and</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">v</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="n">i</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">]</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">_shiftr</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">a</span><span class="p">[:</span><span class="o">-</span><span class="n">x</span><span class="p">]</span>
+    
+    <span class="o">@</span><span class="nb">staticmethod</span>
+    <span class="k">def</span> <span class="nf">_shiftl</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">[</span><span class="n">x</span><span class="p">:]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span>
+
+    <span class="k">def</span> <span class="nf">get32bits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">index</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">kk</span><span class="p">][:</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[(</span><span class="n">kk</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">][</span><span class="mi">1</span><span class="p">:]</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="p">[</span> <span class="n">y</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">A</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">31</span> <span class="o">-</span> <span class="n">i</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span> <span class="p">]</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[(</span><span class="n">kk</span> <span class="o">+</span> <span class="bp">self</span><span class="p">.</span><span class="n">M</span><span class="p">)</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">N</span><span class="p">],</span> <span class="bp">self</span><span class="p">.</span><span class="n">_shiftr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="n">kk</span><span class="p">],</span> <span class="n">z</span><span class="p">)</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="bp">self</span><span class="p">.</span><span class="n">index</span><span class="p">]</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_shiftr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_and</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_shiftl</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="mh">0x9d2c5680</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_and</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_shiftl</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="mh">0xefc60000</span><span class="p">))</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_shiftr</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">return</span> <span class="n">y</span>
+    
+    <span class="k">def</span> <span class="nf">getrandbits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bit</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">get32bits</span><span class="p">()[:</span><span class="n">bit</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">randbytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+        <span class="n">left</span> <span class="o">=</span> <span class="n">n</span>
+
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">while</span> <span class="n">left</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">:</span>
+            <span class="n">left</span> <span class="o">-=</span> <span class="mi">4</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get32bits</span><span class="p">()</span>
+
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+                <span class="n">res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[(</span><span class="mi">3</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">:(</span><span class="mi">4</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">left</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get32bits</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">left</span><span class="p">):</span>
+                <span class="n">res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">q</span><span class="p">[(</span><span class="n">left</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">:(</span><span class="n">left</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">*</span> <span class="mi">8</span><span class="p">][::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="o">==</span> <span class="n">n</span>
+
+        <span class="k">return</span> <span class="n">res</span>
+
+<span class="k">class</span> <span class="nc">Solver</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">equations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">outputs</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">equation</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">eq</span><span class="p">,</span> <span class="n">o</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">outputs</span><span class="p">):</span>
+            <span class="n">lsb</span> <span class="o">=</span> <span class="n">eq</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">eq</span>
+            <span class="k">if</span> <span class="n">equation</span> <span class="o">&amp;</span> <span class="n">lsb</span><span class="p">:</span>
+                <span class="n">equation</span> <span class="o">^=</span> <span class="n">eq</span>
+                <span class="n">output</span> <span class="o">^=</span> <span class="n">o</span>
+        
+        <span class="k">if</span> <span class="n">equation</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">output</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">raise</span> <span class="nb">ValueError</span><span class="p">(</span><span class="s">"Impossible generated bits."</span><span class="p">)</span>
+
+        <span class="n">lsb</span> <span class="o">=</span> <span class="n">equation</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">equation</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="n">lsb</span><span class="p">:</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^=</span> <span class="n">equation</span>
+                <span class="bp">self</span><span class="p">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^=</span> <span class="n">output</span>
+    
+        <span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">equation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">eq</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">equations</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">outputs</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="c1"># Assume every free variable is 0
+</span>                <span class="n">num</span> <span class="o">|=</span> <span class="n">eq</span> <span class="o">&amp;</span> <span class="o">-</span><span class="n">eq</span>
+
+        
+        <span class="n">state</span> <span class="o">=</span> <span class="p">[</span> <span class="p">(</span><span class="n">num</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="mi">32</span> <span class="o">*</span> <span class="n">i</span><span class="p">))</span> <span class="o">&amp;</span> <span class="mh">0xFFFFFFFF</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">624</span><span class="p">)</span> <span class="p">]</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+<span class="k">def</span> <span class="nf">fizzbuzz</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">fb</span> <span class="o">=</span> <span class="s">"sly"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fb</span> <span class="o">+=</span> <span class="s">"fizz"</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">fb</span> <span class="o">+=</span> <span class="s">"buzz"</span>
+    <span class="k">return</span> <span class="n">fb</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+
+    <span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">"localhost"</span><span class="p">,</span> <span class="mi">1013</span><span class="p">)</span>
+
+    <span class="n">size</span> <span class="o">=</span> <span class="mi">5000</span>
+
+    <span class="n">twister</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">()</span>
+    <span class="n">solver</span> <span class="o">=</span> <span class="n">Solver</span><span class="p">()</span>
+
+    <span class="n">twister</span><span class="p">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">624</span>
+
+    <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">twister</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">32</span><span class="p">):</span>
+        <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">twister</span><span class="p">.</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">cnt</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Getting Data..."</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">size</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">io</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="sa">b</span><span class="s">"roll"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="sa">b</span><span class="s">"&gt; "</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="sa">b</span><span class="s">"slyfizzbuzz"</span><span class="p">:</span>
+                <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">cnt</span> <span class="o">+=</span> <span class="n">size</span>
+
+        <span class="n">dats</span> <span class="o">=</span> <span class="p">[</span><span class="n">twister</span><span class="p">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="n">dat</span> <span class="o">=</span> <span class="n">dats</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">dat</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="n">dat</span><span class="p">[</span><span class="mi">4</span><span class="p">:])</span>
+            <span class="n">diff</span> <span class="o">=</span> <span class="n">Twister</span><span class="p">.</span><span class="n">_xor</span><span class="p">(</span><span class="n">diff</span><span class="p">[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+
+            <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">solver</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">diff</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+
+            <span class="n">rank</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">solver</span><span class="p">.</span><span class="n">equations</span><span class="p">)</span>
+
+            <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">rank</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">"</span><span class="se">\r</span><span class="s">"</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">19968</span><span class="p">:</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">rank</span> <span class="o">==</span> <span class="mi">19968</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">solver</span><span class="p">.</span><span class="n">solve</span><span class="p">()</span>
+
+    <span class="n">random</span><span class="p">.</span><span class="n">setstate</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">state</span> <span class="o">+</span> <span class="p">[</span><span class="mi">624</span><span class="p">]),</span> <span class="bp">None</span><span class="p">))</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cnt</span><span class="p">):</span>
+        <span class="n">random</span><span class="p">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+
+    <span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s">"&gt; "</span><span class="p">,</span> <span class="sa">b</span><span class="s">"asdf"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+        <span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="sa">b</span><span class="s">"Guess&gt; "</span><span class="p">,</span> <span class="n">fizzbuzz</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">getrandbits</span><span class="p">(</span><span class="mi">8</span><span class="p">)).</span><span class="n">encode</span><span class="p">())</span>
+
+
+
+    <span class="n">io</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="flag">flag</h3>
+
+<p><code class="language-plaintext highlighter-rouge">hspace{Fizzer_Buzzer_Chicken_Slyfizzbuzzer}</code></p>
+
+</article>
+
+
+      </div>
+    </main>
+  </body>
+</html>

@@ -7,6 +7,10 @@ Admin finally found `haari.me` some usage! He decided to upload his CTF challeng
 
 Don't DDoS plz :(
 
+You can also find all these challenges in [GitHub](https://github.com/soon-haari/my-ctf-challenges).
+
+<br><br>
+
 ### 2024
 
 <!--

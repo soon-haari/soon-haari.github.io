@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>2023 Christmas Ctf</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.4" />
+<meta property="og:title" content="2023 Christmas Ctf" />
+<meta name="author" content="김민순" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This post will probably be the last post of 2023. I wish everyone had a nice year, and even better one incoming." />
+<meta property="og:description" content="This post will probably be the last post of 2023. I wish everyone had a nice year, and even better one incoming." />
+<link rel="canonical" href="http://localhost:4000/2023-christmas-ctf/" />
+<meta property="og:url" content="http://localhost:4000/2023-christmas-ctf/" />
+<meta property="og:site_name" content="I’m such a good surfer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-12-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="2023 Christmas Ctf" />
+<script type="application/ld+json">
+{"description":"This post will probably be the last post of 2023. I wish everyone had a nice year, and even better one incoming.","url":"http://localhost:4000/2023-christmas-ctf/","@type":"BlogPosting","headline":"2023 Christmas Ctf","dateModified":"2023-12-31T00:00:00+09:00","datePublished":"2023-12-31T00:00:00+09:00","author":{"@type":"Person","name":"김민순"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-christmas-ctf/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="I&apos;m such a good surfer" /><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/logo.png" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body a="dark">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <a href="/">cd ..</a><article>
+  <p class="post-meta">
+    <font size="2em">soon_haari</font>
+    <time datetime="2023-12-31 00:00:00 +0900">2023-12-31</time>
+  </p>
+  
+  <h1>2023 Christmas Ctf</h1>
+
+  <p>This post will probably be the last post of 2023. I wish everyone had a nice year, and even better one incoming.</p>
+
+<p><br /></p>
+
+<p>2023 Christmas CTF was held on Dreamhack, with users as authors.</p>
+
+<p>2 crypto challenges were made in total. <a href="https://dreamhack.io/wargame/challenges/1062">Christmas tree seedling</a> by me and <a href="https://dreamhack.io/wargame/challenges/1070">Tropical Santa</a> by RBTree.</p>
+
+<p>I will breifly explain the solutions, since I think both of the challenges were not too hard, but absolutely challenging. Solve code will not be provided because… what’s the fun in that? :)</p>
+
+<p>Also, Tropical Santa has a backstory that is a little bit related to me.</p>
+
+<h2 id="christmas-tree-seedling">Christmas tree seedling</h2>
+<h3 id="challpy">chall.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span><span class="p">;</span> <span class="n">sys</span><span class="p">.</span><span class="n">set_int_max_str_digits</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">random</span><span class="p">;</span> <span class="n">getstate</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">random</span><span class="p">.</span><span class="n">Random</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">getstate</span><span class="p">()</span>
+<span class="kn">from</span> <span class="nn">secret</span> <span class="kn">import</span> <span class="n">flag</span><span class="p">,</span> <span class="n">banner</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">banner</span><span class="p">)</span>
+
+<span class="s">"The only supported seed types are: None, int, float, str, bytes, and bytearray."</span>
+<span class="s">"Let's try all of them!"</span>
+
+<span class="c1"># s_None = None # Edit: Wait, this is used for initialization! This ain't a seed at all!
+</span><span class="n">s_int1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Int seed 1 please: "</span><span class="p">));</span> <span class="k">assert</span> <span class="mi">2</span><span class="o">**</span><span class="mi">40000</span> <span class="o">&lt;=</span> <span class="n">s_int1</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">80000</span>
+<span class="n">s_int2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Int seed 2 please: "</span><span class="p">));</span> <span class="k">assert</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20000</span> <span class="o">&lt;=</span> <span class="n">s_int2</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">40000</span>
+<span class="n">s_int3</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Int seed 3 please: "</span><span class="p">));</span> <span class="k">assert</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2000</span>  <span class="o">&lt;=</span> <span class="n">s_int3</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">20000</span>
+<span class="n">s_int4</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Int seed 4 please: "</span><span class="p">));</span> <span class="k">assert</span> <span class="mi">0</span>        <span class="o">&lt;=</span> <span class="n">s_int4</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2000</span>
+<span class="n">s_int5</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Int seed 5 please: "</span><span class="p">));</span> <span class="k">assert</span>             <span class="n">s_int5</span> <span class="o">&lt;</span> <span class="mi">0</span>
+<span class="c1"># s_float = float(input("Float seed please: ")) # Edit: Nah, this is too useless.
+</span><span class="n">s_str</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"String seed please: "</span><span class="p">)</span>
+<span class="n">s_bytes</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Bytes seed please: "</span><span class="p">))</span>
+<span class="c1"># s_bytearray = bytearray.fromhex(input("Bytearray seed please: ")) # Edit: I think this one's same with bytes one.
+</span>
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">getstate</span><span class="p">,</span> <span class="p">[</span><span class="n">s_int1</span><span class="p">,</span> <span class="n">s_int2</span><span class="p">,</span> <span class="n">s_int3</span><span class="p">,</span> <span class="n">s_int4</span><span class="p">,</span> <span class="n">s_int5</span><span class="p">,</span> <span class="n">s_str</span><span class="p">,</span> <span class="n">s_bytes</span><span class="p">])))</span> <span class="o">==</span> <span class="mi">1</span>
+
+<span class="s">"Oh right, almost forgot the most important one...."</span>
+<span class="n">the_most_important_one</span> <span class="o">=</span> <span class="s">"Merry Christmas! You are the True winner, regardless of the ranking, running nonstop towards your dreams! Thanks for playing, and have fun!!"</span>
+
+<span class="k">assert</span> <span class="n">s_str</span> <span class="o">==</span> <span class="n">s_int1</span><span class="p">.</span><span class="n">to_bytes</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="s">"big"</span><span class="p">)[</span><span class="o">-</span><span class="nb">len</span><span class="p">(</span><span class="n">s_str</span><span class="p">):].</span><span class="n">decode</span><span class="p">()</span> <span class="o">==</span> <span class="n">the_most_important_one</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Python’s random is implemented with the Mersenne Twister.</p>
+
+<p>This challenge’s goal is to find multiple seeds that leads to the same state.</p>
+
+<p>There is a CPython implementation for the seeding algorithm, but luckily I ported one into python. This should be helpful.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">seed</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bytes</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">bytearray</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">encode</span><span class="p">()</span>
+
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">.</span><span class="n">from_bytes</span><span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha512</span><span class="p">(</span><span class="n">s</span><span class="p">).</span><span class="n">digest</span><span class="p">(),</span> <span class="s">"big"</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">s</span> <span class="o">==</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"NoneType seed leads to random result"</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="nb">NotImplementedError</span> <span class="c1"># cuz I was lazy..
+</span>
+    <span class="n">uint32_mask</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">32</span>
+
+    <span class="n">mt</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">624</span><span class="p">)]</span>
+
+    <span class="n">mt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x12bd6aa</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">624</span><span class="p">):</span>
+        <span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mh">0x6c078965</span> <span class="o">*</span> <span class="p">(</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">30</span><span class="p">))</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">uint32_mask</span>
+
+    <span class="n">keys</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="n">uint32_mask</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">&gt;&gt;=</span> <span class="mi">32</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">keys</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">624</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">))):</span>
+        <span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">((</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">30</span><span class="p">))</span> <span class="o">*</span> <span class="mh">0x19660d</span><span class="p">))</span> <span class="o">+</span> <span class="n">keys</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="n">uint32_mask</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">624</span><span class="p">:</span>
+            <span class="n">mt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mt</span><span class="p">[</span><span class="mi">623</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">j</span> <span class="o">%=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">623</span><span class="p">):</span>
+        <span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">((</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">^</span> <span class="p">((</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">^</span> <span class="p">(</span><span class="n">mt</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">30</span><span class="p">))</span> <span class="o">*</span> <span class="mh">0x5d588b65</span><span class="p">))</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="n">uint32_mask</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">624</span><span class="p">:</span>
+            <span class="n">mt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">mt</span><span class="p">[</span><span class="mi">623</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="n">mt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x80000000</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">mt</span> <span class="o">+</span> <span class="p">[</span><span class="mi">624</span><span class="p">]),</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">state</span>
+</code></pre></div></div>
+
+<p>String or bytes seeds uses sha512 hash to make them into integer, which was interesting to me.</p>
+
+<p>I didn’t study much about float seeds, because there are only $2^{32}$ float numbers. Didn’t seem too much meaningful to me.</p>
+
+<p>Key size matters for this algorithm, that’s why there are so many range assertions for integer seeds.</p>
+
+<p>Reversing the algorithm shouldn’t be too hard, especially if you are familiar with PS. I saw one user solved this despite he wasn’t much into cybersecurity.</p>
+
+<p>Wish all of you solve this and be good friends with Mersenne Twister seed.</p>
+
+<p>Don’t forget:
+<code class="language-plaintext highlighter-rouge">the_most_important_one = "Merry Christmas! You are the True winner, regardless of the ranking, running nonstop towards your dreams! Thanks for playing, and have fun!!"</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="tropical-santa">Tropical Santa</h2>
+<h3 id="taskpy">task.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/bin/env python3
+</span>
+<span class="kn">from</span> <span class="nn">tropical</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">signal</span>
+<span class="kn">import</span> <span class="nn">string</span>
+
+
+<span class="k">def</span> <span class="nf">handler</span><span class="p">(</span><span class="n">_signum</span><span class="p">,</span> <span class="n">_frame</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Time out!"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">PoW</span><span class="p">():</span>
+    <span class="k">return</span> <span class="bp">True</span>
+    <span class="n">random</span><span class="p">.</span><span class="n">seed</span><span class="p">(</span><span class="n">os</span><span class="p">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+    <span class="n">CHARSET</span> <span class="o">=</span> <span class="n">string</span><span class="p">.</span><span class="n">ascii_letters</span> <span class="o">+</span> <span class="n">string</span><span class="p">.</span><span class="n">digits</span>
+    <span class="n">to_digest</span> <span class="o">=</span> <span class="s">""</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">CHARSET</span><span class="p">,</span> <span class="mi">20</span><span class="p">))</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">to_digest</span><span class="p">.</span><span class="n">encode</span><span class="p">()).</span><span class="n">hexdigest</span><span class="p">()</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"SHA-256( XXXX + </span><span class="si">{</span><span class="n">to_digest</span><span class="p">[</span><span class="mi">4</span><span class="si">:</span><span class="p">]</span><span class="si">}</span><span class="s"> ) = </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+    <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"What is the answer? &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">user_input</span> <span class="o">==</span> <span class="n">to_digest</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">signal</span><span class="p">.</span><span class="n">signal</span><span class="p">(</span><span class="n">signal</span><span class="p">.</span><span class="n">SIGALRM</span><span class="p">,</span> <span class="n">handler</span><span class="p">)</span>
+    <span class="n">signal</span><span class="p">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">PoW</span><span class="p">():</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"PoW failed."</span><span class="p">)</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Welcome!"</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">stage</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="n">signal</span><span class="p">.</span><span class="n">alarm</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"=== [STAGE </span><span class="si">{</span><span class="n">stage</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s">] ==="</span><span class="p">)</span>
+        <span class="n">privkey</span><span class="p">,</span> <span class="n">pubkey</span> <span class="o">=</span> <span class="n">PrivateKey</span><span class="p">.</span><span class="n">gen_key_pair</span><span class="p">()</span>
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">privkey</span><span class="p">.</span><span class="n">sign</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Here is a public key: </span><span class="si">{</span><span class="n">pubkey</span><span class="si">}</span><span class="s">,"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"and this is the signature: </span><span class="si">{</span><span class="n">signature</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"for a message </span><span class="si">{</span><span class="n">msg</span><span class="p">.</span><span class="nb">hex</span><span class="p">()</span><span class="si">}</span><span class="s">."</span><span class="p">)</span>
+
+        <span class="n">user_msg</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Give me your message &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">user_msg</span> <span class="o">==</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"&gt;:("</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Give me your signature: "</span><span class="p">)</span>
+        <span class="n">sig1</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="n">Elem</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">(</span><span class="s">"1 &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">()])</span>
+        <span class="n">sig2</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="n">Elem</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">(</span><span class="s">"2 &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">()])</span>
+        <span class="n">sig3</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="n">Elem</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">(</span><span class="s">"3 &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">()])</span>
+        <span class="n">sig4</span> <span class="o">=</span> <span class="n">Polynomial</span><span class="p">([</span><span class="n">Elem</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">v</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">input</span><span class="p">(</span><span class="s">"4 &gt; "</span><span class="p">).</span><span class="n">strip</span><span class="p">().</span><span class="n">split</span><span class="p">()])</span>
+        <span class="n">user_sig</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig1</span><span class="p">,</span> <span class="n">sig2</span><span class="p">,</span> <span class="n">sig3</span><span class="p">,</span> <span class="n">sig4</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="s">"Now verifying..."</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">pubkey</span><span class="p">.</span><span class="n">verify</span><span class="p">(</span><span class="n">user_msg</span><span class="p">,</span> <span class="n">user_sig</span><span class="p">):</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">":("</span><span class="p">)</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"./flag"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Congratz."</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"Flag is: </span><span class="si">{</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span><span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<h3 id="tropicalpy">tropical.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha512</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">Elem</span><span class="p">:</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">Polynomial</span><span class="p">:</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">PublicKey</span><span class="p">:</span>
+    <span class="p">...</span>
+
+<span class="k">class</span> <span class="nc">PrivateKey</span><span class="p">:</span>
+    <span class="p">...</span>
+
+</code></pre></div></div>
+
+<p>This challenge is about an interesting signature scheme called Tropical.</p>
+
+<p>It was based on the following paper: <a href="https://eprint.iacr.org/2023/1837.pdf">More forging (and patching) of tropical signatures</a>.</p>
+
+<p>It would be good enough to find the paper and implementing it, but I have a little backstory.</p>
+
+<p><br /></p>
+
+<p>While I was reviewing the according challenge, I first tried solving it without reading the paper. And eventually found an interesting solution.</p>
+
+<p>Unfortunately, RBTree said there were minor implementation errors in the chall, so my attack didn’t work after the fix.</p>
+
+<p>However after modifying a slight bit with some deep thinking, I was able to solve the challenge which was exactly same with the paper with much simpler attack.</p>
+
+<p>I emailed the paper authors about my attack considering RBTree’s advice.</p>
+
+<p>To me, it felt like a Christmas present.</p>
+
+<p><br /></p>
+
+<p>My attack explanation will be following.</p>
+
+<p>Thanks for reading and I wish all of you happy new year, again.</p>
+
+<p>Hope to meet all of you in person someday.</p>
+
+<p><br /><br /></p>
+
+<h2 id="exploiting-the-fact-that-the-result-of-division-is-not-unique">Exploiting the fact that the result of division is not unique</h2>
+
+<p><code class="language-plaintext highlighter-rouge">Tropical polynomial division</code> was explained in <a href="https://eprint.iacr.org/2023/1837">More forging (and patching) of tropical signatures</a>. It is pretty obvious that result of division is not unique after some tests.</p>
+
+<center>$(R \otimes S) / S \neq R$</center>
+
+<p>However, the following properties always hold.</p>
+
+<ol>
+  <li>$(R / S) \otimes S = R$.</li>
+  <li>$R \otimes S$ is always divisible by $S$, however the result is more likely not $R$.</li>
+</ol>
+
+<p>And the division algorithm was used to check if both $S_1$ and $S_2$ are multiple of $H$. And also used during the succeeding attack.</p>
+
+<p>I thought this fact was very interesting, and try to use it generating random signature that can pass the verification.</p>
+
+<p><br /></p>
+
+<p>$M$ is given, and it is hard to factorize since first and last coefficient is 0, which is the smallest.</p>
+
+<p>And the challenge is to generate $m, S_1, S_2, N$ which satisfies the following tests.</p>
+
+<ul>
+  <li>$H = {hash}(m)$</li>
+  <li>$S_1 \otimes S_2 = M \otimes N \otimes H \otimes H$</li>
+  <li>And some more including both $S_1, S_2$ should be divisable by $H$</li>
+</ul>
+
+<p>I first generated random $N$ of size <code class="language-plaintext highlighter-rouge">(2 * d, 2 * r)</code>, and $m, H$ which are random message and hash of it.</p>
+
+<p>And defined $S_1, S_2 = H \otimes M, H \otimes N$. This signature fails because $S_1$ is mono-multiple of $H \otimes N$, and same for $S_2$.</p>
+
+<p>I will define $T = S_1 \otimes S_2 = M \otimes N \otimes H \otimes H$.</p>
+
+<p>When I put value of $T / S_2$ info $S_1$, the multiplication will succeed, however the verification will fail because $S_1$ is not divisible to $H$.</p>
+
+<p>Then what will happen if $S_1 = (T / (S_2 \otimes H)) \otimes H$?</p>
+
+<p>$S_1$ is divisible by $H$, but does the multiplication succeed?</p>
+
+<center>$S_1 \otimes S_2 = (T / (S_2 \otimes H)) \otimes H \otimes S_2 = T / (S_2 \otimes H) \otimes (S_2 \otimes H) = T$</center>
+
+<p>We can see that the multiplication also succeeds, and the generated $S_1$ passes all the tests on it, just $S_2$ fail.</p>
+
+<p>$S_2$ can also be regenerated through the same method.</p>
+
+<center>$S_2 = (T / (S_1 \otimes H)) \otimes H$</center>
+
+<p>The regeneration of $S_1, S_2$ should be calculated sequentially, not simultaneously.</p>
+
+<p>After that, the signature of $(m, S_1, S_2, N)$ successfully verfies.</p>
+
+<p>This attack always succeeds for any kind of $M$, and any $m$ is allowed to use.</p>
+
+</article>
+
+
+      </div>
+    </main>
+  </body>
+</html>

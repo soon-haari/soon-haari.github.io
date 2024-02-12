@@ -76,16 +76,3 @@ p.innerHTML = `<ul><li><a href = "${link}" target="_blank">${name}</a></li></ul>
 // document.body.children[0].children[0].children[1].append(p)
 lis = document.getElementsByTagName('li')
 lis[lis.length - 1].append(p)
-
-
-
-
-
-
-
-
-
-
-
-
-

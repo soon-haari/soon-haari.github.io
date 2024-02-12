@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Functional(icc Athens 2022)</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.4" />
+<meta property="og:title" content="Functional(icc Athens 2022)" />
+<meta name="author" content="김민순" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Wonder Why" />
+<meta property="og:description" content="Wonder Why" />
+<link rel="canonical" href="http://localhost:4000/functional-icc-athens-2022/" />
+<meta property="og:url" content="http://localhost:4000/functional-icc-athens-2022/" />
+<meta property="og:site_name" content="I’m such a good surfer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-10T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Functional(icc Athens 2022)" />
+<script type="application/ld+json">
+{"description":"Wonder Why","url":"http://localhost:4000/functional-icc-athens-2022/","@type":"BlogPosting","headline":"Functional(icc Athens 2022)","dateModified":"2023-07-10T00:00:00+09:00","datePublished":"2023-07-10T00:00:00+09:00","author":{"@type":"Person","name":"김민순"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/functional-icc-athens-2022/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="I&apos;m such a good surfer" /><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/logo.png" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body a="dark">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <a href="/">cd ..</a><article>
+  <p class="post-meta">
+    <font size="2em">soon_haari</font>
+    <time datetime="2023-07-10 00:00:00 +0900">2023-07-10</time>
+  </p>
+  
+  <h1>Functional(icc Athens 2022)</h1>
+
+  <p><br /><br /></p>
+
+<p>I will review a challenge in category <a href="https://cryptohack.org/challenges/ctf-archive/">“CTF Archive”</a> from <a href="https://cryptohack.org/">cryptohack.org</a>.</p>
+
+<p>I didn’t categorize this post as “write-up” because I wanted “write-up” category to be filled with only CTFs I participated.</p>
+
+<p>This was a completely new type of challenge during my entire crypto path, and I really enjoyed it.</p>
+
+<p>The entire challenge required deep knowledge of linear algebra, crypto, algorithms even.</p>
+
+<p><br /></p>
+
+<h3 id="description">Description</h3>
+<ul>
+  <li>It only took me four heat deaths of the universe to encrypt this flag.</li>
+</ul>
+
+<h3 id="functionalsage">functional.sage</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">secret_params</span> <span class="kn">import</span> <span class="p">(</span><span class="n">COEFFS</span><span class="p">,</span>
+                            <span class="n">ITERS</span> <span class="c1"># ITERS = secrets.randrange(13**37)
+</span>                            <span class="p">)</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+
+<span class="n">F</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">142</span> <span class="o">-</span> <span class="mi">111</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">COEFFS</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)))))</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">6</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">4</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">42</span>
+
+<span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">+</span> <span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">i</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">31337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">j</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">S3</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="n">digits</span><span class="p">(</span><span class="mi">1337</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">31337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]).</span><span class="n">dot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">))))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 1:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">ITERS</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)])</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 2:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="n">S3</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">(</span><span class="n">ITERS</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1337</span><span class="p">)]</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 3:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="n">ITERS</span><span class="p">)).</span><span class="n">encode</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_ECB</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">strip</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)).</span><span class="nb">hex</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h3 id="outputtxt">output.txt</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stage 1:
+========
+[3938419846976491177353386476959871391250276, 
+...(REDACTED, There's more of course), 
+644082098542529088290239024585910512264303]
+Stage 2:
+========
+Stage 3:
+========
+bf7d4897735f758539188cf654e6003ce5ebff7cbfd3ba766b653366435e53e73013713fae33cfc240e04d6a8122db42c3dd29a13d68b9c4ae7f314664f43703
+</code></pre></div></div>
+
+<p>The source code is pretty short, but the depth behind this definitely surprised me.</p>
+
+<p><br /><br /><br /></p>
+
+<h2 id="step-1-recovering-iters-from-given-output">Step 1. Recovering ITERS from given output</h2>
+
+<p>Gladly, the steps of this challenge are nicely separated.</p>
+
+<p>As there are a lot of functions in this challenge, but to get ITERS, we only need to observe function <code class="language-plaintext highlighter-rouge">f</code>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">F</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">142</span> <span class="o">-</span> <span class="mi">111</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">COEFFS</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)))))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 1:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">ITERS</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span><span class="p">)])</span>
+</code></pre></div></div>
+
+<p>When we observe function <code class="language-plaintext highlighter-rouge">f</code>, we can see that it is a function defined as:</p>
+
+<ul>
+  <li>len(COEFFS) initial values for f(0) ~ f(len(COEFFS) - 1)</li>
+  <li>if n &gt;= len(COEFFS), dot product with the given COEFFS and f(n - 1) ~ f(n - len(COEFFS))</li>
+</ul>
+
+<p>We can see that it is a basic <code class="language-plaintext highlighter-rouge">recurrence relation</code> like the Fibonacci sequence.</p>
+
+<p>(P.S. The author said this operation took 4 <a href="https://en.wikipedia.org/wiki/Heat_death_of_the_universe">heat deaths of the universe</a> assuming this operation takes O(N) time complexity, but when we look at it deeper, there’s no memoization, so this operation takes depth of N recursive functions and O(2^N) time complexity haha.</p>
+
+<p>I don’t think O(2^2^128) will be done in ONLY 4 heat deaths of the universe.)</p>
+
+<p><br /><br /></p>
+
+<p>It is well known that we can calculate Fibonacci(N) with O(logN) time complexity by converting it to a matrix.</p>
+
+<center>$\begin{bmatrix} F_{n}  \\ F_{n + 1}\end{bmatrix} = \begin{bmatrix}0 &amp; 1 \\ 1 &amp; 1\end{bmatrix}\begin{bmatrix}F_{n - 1}\\F_{n}\end{bmatrix}$</center>
+
+<p>Because we can compute power of middle matrix with log time complexity.</p>
+
+<p>With the same method, we can construct the matrix in function <code class="language-plaintext highlighter-rouge">f</code>’s case too.</p>
+
+<p><br /></p>
+
+<p>But first, we MUST know the length of COEFFS, or we can’t proceed anything.</p>
+
+<p>This can be done easily by using 500 outputs, and iterating the lengths.</p>
+
+<p>Sage’s solve_right can be used here checking the recurrence relation. If there are no root of COEFFS, the length is wrong.</p>
+
+<p><br /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3938419846976491177353386476959871391250276</span><span class="p">,</span> <span class="p">...,</span> <span class="mi">644082098542529088290239024585910512264303</span><span class="p">]</span>
+
+<span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">==</span> <span class="mi">500</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">142</span> <span class="o">-</span> <span class="mi">111</span>
+<span class="n">GFp</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">142</span> <span class="o">-</span> <span class="mi">111</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">250</span><span class="p">):</span>
+    <span class="c1"># l = length of COEFFS
+</span>    <span class="n">mat</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500</span> <span class="o">-</span> <span class="n">l</span><span class="p">):</span>
+        <span class="n">mat</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">l</span><span class="p">])</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">l</span><span class="p">])</span>
+
+    <span class="n">mat</span> <span class="o">=</span> <span class="n">Matrix</span><span class="p">(</span><span class="n">GFp</span><span class="p">,</span> <span class="n">mat</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">vector</span><span class="p">(</span><span class="n">GFp</span><span class="p">,</span> <span class="n">res</span><span class="p">)</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">COEFFS</span> <span class="o">=</span> <span class="n">mat</span><span class="p">.</span><span class="n">solve_right</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">COEFFS</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>len(COEFFS) = 20
+COEFFS = (75853883610309597642200581281276453016977, ..., 2499633494185931196982831794661758600052741)
+len(COEFFS) = 21
+COEFFS = (1955817776487665191870045349448891442406234, ..., 1958657366602383996322663779666409703587544, 0)
+...
+</code></pre></div></div>
+
+<p>Note that there always exists a root for <code class="language-plaintext highlighter-rouge">l &gt;= 20</code> followed by (l - 20) zero values, because obviously if we can express a value with 20 variables, we can definitely do it with more.</p>
+
+<p>So we can assume len(COEFFS) is 20.</p>
+
+<p><br /></p>
+
+<p>Although I wish there was something in the challenge to prove that COEFFS cannot be reduced anymore.</p>
+
+<p>Because <code class="language-plaintext highlighter-rouge">f</code>’s initial values completely depend on length of COEFFS. And 21 length COEFFS including 0 value can actually work.</p>
+
+<p>I first thought <code class="language-plaintext highlighter-rouge">assert prod(COEFFS)</code> would be good enough, but realized it is not.</p>
+
+<p>Not really sure of a nice way to solve this problem.</p>
+
+<p><br /><br /><br /></p>
+
+<p>Now we know all the informations needed to make the recurrence relation.</p>
+
+<p>And we can construct the matrix equation according to that relation:</p>
+
+<center>$\begin{bmatrix}
+f_{n - 18} \\
+f_{n - 17} \\
+\vdots  \\
+f_{n} \\
+f_{n + 1}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 &amp; 1 &amp; \cdots  &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+\vdots  &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; 0 &amp; 1 \\
+CF_{0} &amp; CF_{1} &amp; \cdots &amp; CF_{18} &amp; CF_{19}
+\end{bmatrix}
+\begin{bmatrix}
+f_{n - 19} \\
+f_{n - 18} \\
+\vdots  \\
+f_{n - 1} \\
+f_{n}
+\end{bmatrix}$</center>
+
+<p>We have the initial vector, and vector after ITERS multiplication, so only DLP problem left to get ITERS.</p>
+
+<p><br /></p>
+
+<p>Gladly, there is a challenge called “The Matrix Revolutions” from cryptohack’s <a href="https://cryptohack.org/challenges/diffie-hellman/">Diffie-Hellman</a> category.</p>
+
+<p>I reviewed the challenge and solutions, and especially got help from hellman’s solution using <code class="language-plaintext highlighter-rouge">charpoly()</code>.</p>
+
+<p>Actually Matrix itself can be DLPed too, but I thought the generated order is too large compared to polynomial. Doesn’t really matter though.</p>
+
+<p>For k * k matrix on GF(p) I learned that the order is $(p^k - 1)(p^k - p)(p^k - p^2) … (p^k - p^{k-1})$ from <a href="https://asisctf.com">ASIS CTF 2022</a> - Vindica.</p>
+
+<p><br /><br /></p>
+
+<p>When I factored the polynomial from charpoly(), It resulted like this:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(x^2 + 2068268905390596798719245736993915846629200*x + 634339472864573949596883090530146493127425) * (x^2 + 4188499892935915887716683610622478376038780*x + 4289906949466513447764172549738291287262736) * (x^3 + 31337)^3 * (x^7 + 2393970306752867687349097994046027930269265*x^6 + 4240925555251609271003753212718693332030014*x^5 + 5481963693833288113484648617324833274476930*x^4 + 3950536897508533279095380034516993640063002*x^3 + 958182397373590305928885762825477291936086*x^2 + 595941645193337044819907057654877588408728*x + 2684083987109102269511552970105503551935140)
+</code></pre></div></div>
+
+<p>Since the degree of factors are: <code class="language-plaintext highlighter-rouge">2, 2, 3^3, 7</code></p>
+
+<p>We can assume that the order is:</p>
+
+<center>$lcm(p^2 - 1, p^9-p^6, p^7 - 1)$</center>
+
+<p>And checked if it works. It worked well.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tot_order</span> <span class="o">=</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">p</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="p">((</span><span class="n">p</span><span class="o">^</span><span class="mi">7</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span><span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">*</span> <span class="n">p</span><span class="o">^</span><span class="mi">6</span>
+<span class="k">assert</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tot_order</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p><br /><br /></p>
+
+<p>Now for DLP, Pohlig-Hellman needs small factors of the order.</p>
+
+<p>I tried factoring that <code class="language-plaintext highlighter-rouge">tot_order</code> and resulted there are only these reasonable factors.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">small_factors</span> <span class="o">=</span> <span class="mi">2</span><span class="o">^</span><span class="mi">5</span> <span class="o">*</span> <span class="mi">3</span><span class="o">^</span><span class="mi">2</span> <span class="o">*</span> <span class="mi">13</span> <span class="o">*</span> <span class="mi">47</span> <span class="o">*</span> <span class="mi">419</span> <span class="o">*</span> <span class="mi">643</span> <span class="o">*</span> <span class="mi">1249</span> <span class="o">*</span> <span class="mi">888721</span> <span class="o">*</span> <span class="mi">1406497</span> <span class="o">*</span> <span class="mi">10936843</span> <span class="o">*</span> <span class="mi">830370383</span>
+<span class="k">assert</span> <span class="n">tot_order</span> <span class="o">%</span> <span class="n">small_factors</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div></div>
+
+<p>Moreover, our base <code class="language-plaintext highlighter-rouge">x</code>’s order is more important than the Field’s order.</p>
+
+<p>Turns out <code class="language-plaintext highlighter-rouge">x</code> is already a multiple of <code class="language-plaintext highlighter-rouge">13, 643, 1249</code>, so we have to exclude those factors during the DLP operation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fcts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="o">^</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">419</span><span class="p">,</span> <span class="mi">888721</span><span class="p">,</span> <span class="mi">1406497</span><span class="p">,</span> <span class="mi">10936843</span><span class="p">,</span> <span class="mi">830370383</span><span class="p">]</span>
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sage</span><span class="p">:</span> <span class="n">prod</span><span class="p">([</span><span class="mi">2</span><span class="o">^</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="o">^</span><span class="mi">2</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">419</span><span class="p">,</span> <span class="mi">888721</span><span class="p">,</span> <span class="mi">1406497</span><span class="p">,</span> <span class="mi">10936843</span><span class="p">,</span> <span class="mi">830370383</span><span class="p">]).</span><span class="n">bit_length</span><span class="p">()</span>
+<span class="mi">116</span>
+<span class="n">sage</span><span class="p">:</span> <span class="p">(</span><span class="mi">13</span><span class="o">**</span><span class="mi">37</span><span class="p">).</span><span class="n">bit_length</span><span class="p">()</span>
+<span class="mi">137</span>
+</code></pre></div></div>
+
+<p>We can see the remainder from Pohlig-Hellman is still 21 bits behind from the required ITERS’ size.</p>
+
+<p>Gladly, 21 bits is Fair enough for Exhaustive search.</p>
+
+<p><br /><br /></p>
+
+<p>I didn’t find any kind of sage built-in for polynomial logarithms.</p>
+
+<p>I implemented it myself using baby-step, giant-step method.</p>
+
+<p><br /></p>
+
+<p>After Pohlig-Hellman method, exhaustive search is required to get complete ITERS.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="n">dlog</span> <span class="o">=</span> <span class="n">crt</span><span class="p">(</span><span class="n">rem</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+    <span class="n">mod</span> <span class="o">=</span> <span class="n">prod</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+
+    <span class="k">assert</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">largos</span> <span class="o">*</span> <span class="n">dlog</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span> <span class="o">==</span> <span class="nb">pow</span><span class="p">(</span><span class="n">Gmul_poly</span><span class="p">,</span> <span class="n">largos</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+
+
+    <span class="n">add</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mod</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dlog</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="mi">2</span><span class="o">^</span><span class="mi">23</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">st</span> <span class="o">==</span> <span class="n">Gmul_poly</span><span class="p">:</span>
+            <span class="n">ans</span> <span class="o">=</span> <span class="n">dlog</span> <span class="o">+</span> <span class="n">mod</span> <span class="o">*</span> <span class="n">i</span>
+            <span class="k">break</span>
+        <span class="n">st</span> <span class="o">*=</span> <span class="n">add</span>
+        <span class="n">st</span> <span class="o">%=</span> <span class="n">poly</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="n">ans</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">pow</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">ans</span><span class="p">,</span> <span class="n">poly</span><span class="p">)</span> <span class="o">==</span> <span class="n">Gmul_poly</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>100%|████████████████████████████| 8/8 [00:12&lt;00:00,  1.54s/it]
+64383183900624973568315342058469152
+ 15%|█▉           | 1228897/8388608 [01:09&lt;06:42, 17783.95it/s]
+79120327624133200239720213852419346424887
+</code></pre></div></div>
+
+<p>We Found <code class="language-plaintext highlighter-rouge">ITERS = 79120327624133200239720213852419346424887</code> finally.</p>
+
+<p><br /><br /><br /></p>
+
+<h2 id="step-2-calculating-s3">Step 2. Calculating S3</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">6</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">4</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span><span class="p">)])</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">**</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">42</span>
+
+<span class="k">def</span> <span class="nf">h</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="mi">6</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">+</span> <span class="n">n</span>
+
+<span class="k">def</span> <span class="nf">i</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">sin</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">COEFFS</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span> <span class="o">+</span> <span class="n">n</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">31337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)]).</span><span class="n">dot</span><span class="p">([</span><span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">g</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">3</span><span class="p">),</span> <span class="n">h</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">),</span> <span class="n">i</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)])</span> <span class="o">+</span> <span class="mi">1</span>
+
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="p">...</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 2:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="n">S3</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">(</span><span class="n">ITERS</span> <span class="o">+</span> <span class="n">k</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1337</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>Now we have to generate list of S3 which is defined as:</p>
+
+<p><code class="language-plaintext highlighter-rouge">[i(ITERS + k) for k in range(1337)]</code></p>
+
+<p>ITERS’ value is very large, so we have to find an efficient, especially O(logN) way to compute function <code class="language-plaintext highlighter-rouge">i</code>.</p>
+
+<p>(I first thought this challenge was finished after I calculated ITERS. It was not.)</p>
+
+<p><br /><br /></p>
+
+<p>Function <code class="language-plaintext highlighter-rouge">g</code>, <code class="language-plaintext highlighter-rouge">h</code>, <code class="language-plaintext highlighter-rouge">i</code> are defined as:</p>
+<ul>
+  <li>$g(n) = Cg(n - 6) + Ch(n - 2) + Ci(n - 3) + Cg(n - 3) + Ch(n - 4) + Ci(n)$
+$+ 2n^3 + 42$</li>
+  <li>$h(n) = Ch(n - 3) + Ci(n - 1) + Cg(n - 2) + Ch(n - 1) + n$</li>
+  <li>$i(n) = Ci(n - 2) + Cg(n - 3) + Ch(n - 3) + Ch(n - 1) + Ci(n - 1) + 1$</li>
+</ul>
+
+<p>I wrote every known constant value as C.</p>
+
+<p><br /><br /></p>
+
+<p>This time the goal is not the DLP, but just generalizing the function in any kind of way.</p>
+
+<p>And with matrix construction, that can be actually easily done,</p>
+
+<p>If it wasn’t for additional $2n^3 + 42$, $n$, $1$.</p>
+
+<p><br /><br /></p>
+
+<p>Then how we can remove those disturbing additional tails?</p>
+
+<p>Gladly, I have faced these kind of question during math solving before.</p>
+
+<p><br /></p>
+
+<p>Let’s give an example of a recurrence relation.</p>
+
+<center>$a_{n + 1} = 2a_{n} + 3$</center>
+
+<p>How can we generalize this?</p>
+
+<p>We can sum up some constant number in both side to make the form equal.</p>
+
+<center>$a_{n + 1} + 3 = 2(a_{n} + 3)$</center>
+
+<p>Then we define $a’_{n} = a_{n} + 3$ and $a’_{n}$ can easily be generalized.</p>
+
+<p><br /><br /></p>
+
+<p>How about this case?</p>
+
+<center>$b_{n + 1} = 2b_{n} + n$</center>
+
+<p>Little bit trickier, but doable.</p>
+
+<center>$b_{n + 1} + n + 1 = 2b_{n} + n + n + 1$</center>
+
+<center>$b_{n + 1} + (n + 1) = 2(b_{n} + n) + 1$</center>
+
+<center>$b_{n + 1} + (n + 1) + 1 = 2(b_{n} + n + 1)$</center>
+
+<p>Finally, we can define $b’_{n} = b_{n} + n + 1$, and $b’_{n + 1} = 2b’_{n}$ comes out as a result.</p>
+
+<p><br /><br /></p>
+
+<p>There are more exceptions like this, but everything is fine if we just extend the degrees of $n$s.</p>
+
+<center>$c_{n + 1} = c_{n} + n$</center>
+
+<p>This one is impossible with just constant, and 1 degree of $n$.</p>
+
+<center>$c_{n + 1} - \frac{(n+1)^2}{2} = c_{n} + n- \frac{(n+1)^2}{2} = c_{n} - \frac{n^2}{2} - \frac{1}{2}$</center>
+
+<center>$c_{n + 1} - \frac{(n+1)^2}{2} + \frac{n + 1}{2} = c_{n} - \frac{n^2}{2} + \frac{n}{2}$</center>
+
+<p><br /></p>
+
+<center>$c'_{n} = c_{n} - \frac{n^2}{2} + \frac{n}{2} = constant$</center>
+
+<p><br /><br /></p>
+
+<p>So the conclusion is, by defining $g’_{n} = g_{n} + dn^3 + cn^2 + bn + a$,</p>
+
+<p>and <code class="language-plaintext highlighter-rouge">h</code>, <code class="language-plaintext highlighter-rouge">i</code> as well, we can remove all the polynomial tails of $n$.</p>
+
+<p>(If that doesn’t have a solution, we can always add $en^4$, but until $dn^3$ worked fine.)</p>
+
+<p>We have 4 coefficients per function, so total 12 variables.</p>
+
+<p><br /></p>
+
+<p>Because no any other variables are multiplied, and 2 or more coefficients are never multiplied to each other,</p>
+
+<p>finding those coefficients is easy as solving 12 linear equations with 12 variables.</p>
+
+<p><br /><br /></p>
+
+<p>After that, when we finally have recurrence relations as perfectly linear equations,</p>
+
+<p>we can construct matrix equations, but with a little sense.</p>
+
+<p><br /></p>
+
+<p>Unlike step 1, we have 3 functions now.</p>
+
+<p>So we just have to set the old vector with</p>
+
+<p><code class="language-plaintext highlighter-rouge">g(n - 5 ~ n), h(n - 5 ~ n), i(n - 5 ~ n)</code></p>
+
+<p>and the new vector with</p>
+
+<p><code class="language-plaintext highlighter-rouge">g(n - 4 ~ n + 1), h(n - 4 ~ n + 1), i(n - 4 ~ n + 1)</code></p>
+
+<p>Middle matrix has to be 18 * 18 of size.</p>
+
+<p><br /></p>
+
+<p>By the way, <code class="language-plaintext highlighter-rouge">g(n)</code> including <code class="language-plaintext highlighter-rouge">i(n)</code> itself was very disturbing,
+so I decided to put <code class="language-plaintext highlighter-rouge">i(n)</code>’s recurrence directly into <code class="language-plaintext highlighter-rouge">g(n)</code>.</p>
+
+<p>Theory for Step 2. is already extremely difficult, but implementing this in code is just another level LOL.</p>
+
+<p><br /></p>
+
+<p>Front two values of S3 resulted as:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>S3: [3344857554155236898658903831873044678801896, 3649959069781203859142471843095989397157559]
+</code></pre></div></div>
+
+<p><br /><br /><br /></p>
+
+<h2 id="step-3-calculating-jn">Step 3. Calculating j(n)</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">j</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">F</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">S3</span><span class="p">[</span><span class="n">d</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">ZZ</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="n">digits</span><span class="p">(</span><span class="mi">1337</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">([</span><span class="n">F</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">10000</span><span class="o">*</span><span class="n">np</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="mi">31337</span> <span class="o">+</span> <span class="n">i</span><span class="p">)))</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)]).</span><span class="n">dot</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">10</span><span class="o">^</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">-</span> <span class="n">np</span><span class="p">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">100</span><span class="p">))))</span>
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="p">...</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Stage 3:"</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"========"</span><span class="p">)</span>
+    <span class="n">key</span> <span class="o">=</span> <span class="n">hashlib</span><span class="p">.</span><span class="n">sha256</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">(</span><span class="n">ITERS</span><span class="p">)).</span><span class="n">encode</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>Calculating <code class="language-plaintext highlighter-rouge">j</code> function seems obvious, because it is completely linear, and there is no <code class="language-plaintext highlighter-rouge">n</code>-polynomials like Step 2.</p>
+
+<p>But the problem is that the size is 10000 this time.</p>
+
+<p><br /></p>
+
+<p>It is not possible to construct a 10000 * 10000 matrix due to memory limits and time complexity.</p>
+
+<p>But using the charpoly() I mentioned in Step 1, this can be done with 10000 degreed polynomial.</p>
+
+<p><br /></p>
+
+<p>However, constructing a matrix, and converting it into a polynomial like Step 1. is not possible, we have to directly construct the polynomial.</p>
+
+<p>It took some time for me to understand why does Hellman’s <code class="language-plaintext highlighter-rouge">The Matrix Revolutions</code>’ solution work.</p>
+
+<p>And fascinated the modulus polynomial is exactly equal to coefficients in the recurrence equation.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pow Done.
+Mul Done.
+4884838814356754393675352922066305300889643
+</code></pre></div></div>
+
+<p>We can see <code class="language-plaintext highlighter-rouge">j(ITERS)</code>’s value is 4884838814356754393675352922066305300889643, and the challenge is finished.</p>
+
+<p><br /><br /></p>
+
+<p>In total, my solution code took around 1.5 minutes for Step 1,</p>
+
+<p>DLP was fast, but the final brute force part took the longest.</p>
+
+<p>And less than 10 seconds for Step 2 and Step 3.</p>
+
+<p>Here is my final solve code: <a href="https://github.com/soon-haari/soon-haari.github.io/blob/master/files/functional/ex.sage">ex.sage</a></p>
+
+<p><br /></p>
+
+<p>The fact you don’t even know if your ITERS and S3 is correct or not during solving makes the challenge a hundred times harder.</p>
+
+<p>I always love incredibly hard challenges with short source codes.</p>
+
+<p>Thanks to this, I am planning to create a challenge of my own with some additional tweaks later.</p>
+
+<p>Huge respect to Robin, the author again.</p>
+
+<p><br /></p>
+
+<p>Flag: <code class="language-plaintext highlighter-rouge">ICC{N0w_y0u_4re_a_mast3r_0f_t3h_l1n34r_r3curr3nc3s!}</code></p>
+
+
+</article>
+
+
+      </div>
+    </main>
+  </body>
+</html>

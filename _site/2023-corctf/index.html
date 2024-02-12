@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>2023 Corctf</title><!-- Begin Jekyll SEO tag v2.7.1 -->
+<meta name="generator" content="Jekyll v3.9.4" />
+<meta property="og:title" content="2023 Corctf" />
+<meta name="author" content="김민순" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="With Team “cat :flag_kr:”" />
+<meta property="og:description" content="With Team “cat :flag_kr:”" />
+<link rel="canonical" href="http://localhost:4000/2023-corctf/" />
+<meta property="og:url" content="http://localhost:4000/2023-corctf/" />
+<meta property="og:site_name" content="I’m such a good surfer" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-31T00:00:00+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="2023 Corctf" />
+<script type="application/ld+json">
+{"description":"With Team “cat :flag_kr:”","url":"http://localhost:4000/2023-corctf/","@type":"BlogPosting","headline":"2023 Corctf","dateModified":"2023-07-31T00:00:00+09:00","datePublished":"2023-07-31T00:00:00+09:00","author":{"@type":"Person","name":"김민순"},"mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-corctf/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="I&apos;m such a good surfer" /><script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    TeX: {
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    },
+    tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$'] ],
+    processEscapes: true,
+  }
+});
+MathJax.Hub.Register.MessageHook("Math Processing Error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+MathJax.Hub.Register.MessageHook("TeX Jax - parse error",function (message) {
+	  alert("Math Processing Error: "+message[1]);
+	});
+</script>
+
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+  <link rel="shortcut icon" type="image/x-icon" href="/logo.png" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+</head>
+<body a="dark">
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <a href="/">cd ..</a><article>
+  <p class="post-meta">
+    <font size="2em">soon_haari</font>
+    <time datetime="2023-07-31 00:00:00 +0900">2023-07-31</time>
+  </p>
+  
+  <h1>2023 Corctf</h1>
+
+  <p>With Team “cat :flag_kr:”</p>
+
+<p><br /><br /></p>
+
+<h2 id="crypto---eyes">crypto - eyes</h2>
+
+<h3 id="mainsage">main.sage</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">bytes_to_long</span><span class="p">,</span> <span class="n">getPrime</span>
+
+<span class="c1"># my NEW and IMPROVED secret sharing scheme!! (now with multivariate quadratics)
+</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'flag.txt'</span><span class="p">,</span> <span class="s">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">s</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1024</span>
+
+<span class="n">conv</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">)[</span><span class="mi">2</span><span class="p">:][::</span><span class="o">-</span><span class="mi">1</span><span class="p">].</span><span class="n">ljust</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="s">'0'</span><span class="p">))])</span>
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">random_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
+        <span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">random_matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="p">[</span><span class="n">F</span><span class="p">(</span><span class="n">s</span><span class="p">)])</span>
+
+<span class="n">fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">A</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">B</span><span class="p">.</span><span class="n">T</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">C</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">7</span><span class="p">):</span>
+    <span class="n">L</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">fn</span><span class="p">(</span><span class="n">conv</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>This is a challenge that constructs a 1024 * 1024 matrix on GF(p).</p>
+
+<p>And we know the result of some result of front multiplication and back multiplication combined.</p>
+
+<p>That gives us info about 9 values inside matrix <code class="language-plaintext highlighter-rouge">A</code>.</p>
+
+<p><br /></p>
+
+<p>Playing with those values easily leaves us the flag value.</p>
+
+<h3 id="expy">ex.py</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">L</span> <span class="o">=</span> <span class="p">[...]</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">L</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="p">((</span><span class="n">L</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span> <span class="o">-</span> <span class="p">(</span><span class="n">L</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">L</span><span class="p">[</span><span class="mi">4</span><span class="p">]))</span> <span class="o">%</span> <span class="n">p</span>
+
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">flag</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{mind your ones and zeroes because zero squared is zero and one squared is one}</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="crypto---fizzbuzz100">crypto - fizzbuzz100</h2>
+
+<h3 id="fizzbuzz100py">fizzbuzz100.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/local/bin/python
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">urandom</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">flag</span> <span class="o">+</span> <span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">flag</span> <span class="o">&lt;</span> <span class="n">n</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">n</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">e</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">ct</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">))</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Fizz"</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Buzz"</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">pt</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>We can easily decrypt flag from the case when flag isn’t a multiple of 3 or 5.</p>
+
+<h3 id="expy-1">ex.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">"be.ax"</span><span class="p">,</span> <span class="mi">31100</span><span class="p">)</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"n = "</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"e = "</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"ct = "</span><span class="p">)</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+
+<span class="n">to_send</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">ct</span>
+<span class="n">to_send</span> <span class="o">%=</span> <span class="n">n</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">to_send</span><span class="p">))</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">)</span>
+
+<span class="n">flag_2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">flag_2</span> <span class="o">//</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{h4ng_0n_th15_1s_3v3n_34s13r_th4n_4n_LSB_0r4cl3...4nyw4y_1snt_f1zzbuzz_s0_fun}</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="crypto---fizzbuzz101">crypto - fizzbuzz101</h2>
+
+<h3 id="fizzbuzz101py">fizzbuzz101.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/local/bin/python
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">urandom</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">flag</span> <span class="o">+</span> <span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">flag</span> <span class="o">&lt;</span> <span class="n">n</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">n</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">e</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">ct</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">))</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Fizz"</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Buzz"</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s">"101"</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now, the result doesn’t give any information of the decrypted flag, except for whether it’s divisable with 3, 5.</p>
+
+<p>This is a famous LSB oracle challenge, but I always ironically had a difficult time implementing it :((</p>
+
+<p><br /></p>
+
+<p>We can know whether <code class="language-plaintext highlighter-rouge">flag * k</code> is divisible of 3 or 5. I was surprised that FizzBuzz is an actual existing thing with the same rule.</p>
+
+<p>My idea was to reconnect until flag is relatively prime to 15.</p>
+
+<p>When I know <code class="language-plaintext highlighter-rouge">[flag * k, flag * (k + 1) ... flag * (k + 14)]</code>, exactly one of them must result to “FizzBuzz”. With that we can discover (flag * k) % 15.</p>
+
+<p>Of course, we don’t know the result for <code class="language-plaintext highlighter-rouge">flag % 15</code>, so we have to try all 8 (<code class="language-plaintext highlighter-rouge">[1, 2, 4, 7, 8, 11, 13, 14]</code>) cases.</p>
+
+<p><br /></p>
+
+<p>Only one case out of 8 possibility has the possible root.</p>
+
+<p><br /></p>
+
+<h3 id="expy-2">ex.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
+
+<span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">"be.ax"</span><span class="p">,</span> <span class="mi">31101</span><span class="p">)</span>
+<span class="c1"># io = process(["python3", "fizzbuzz101.py"])
+</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"n = "</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"e = "</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"ct = "</span><span class="p">)</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ct</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">"zz"</span> <span class="ow">in</span> <span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"unlucky"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">get10</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">to_send</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="n">io</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="nb">pow</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">ct</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">))</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">io</span><span class="p">.</span><span class="n">recvlines</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="k">if</span> <span class="sa">b</span><span class="s">"FizzBuzz"</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">ret</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">==</span> <span class="n">l</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">tt_send</span> <span class="o">=</span> <span class="n">to_send</span><span class="p">[:]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tt_send</span><span class="p">):</span>
+        <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tt_send</span><span class="p">))</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get10</span><span class="p">(</span><span class="n">tt_send</span><span class="p">[:</span><span class="mi">10</span><span class="p">]))</span>
+        <span class="n">tt_send</span> <span class="o">=</span> <span class="n">tt_send</span><span class="p">[</span><span class="mi">10</span><span class="p">:]</span>
+
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">tot_len</span> <span class="o">=</span> <span class="mi">1000</span>
+
+<span class="n">to_send</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">to_send</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+
+<span class="n">res_ind</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">res_ind</span><span class="p">.</span><span class="n">append</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">res_ind</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">bs</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">res_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">suc</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_st</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">cur</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span>
+
+        <span class="k">if</span> <span class="n">new_st</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">suc</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">st</span> <span class="o">+</span> <span class="n">new_st</span>
+
+    <span class="k">if</span> <span class="n">suc</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">st</span> <span class="o">*</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">flag</span><span class="p">))</span>
+
+
+<span class="n">io</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{''.join(fizz_buzz(x) for x in range(99, 102)) == "FizzBuzz101" == cool_username}</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="crypto---fizzbuzz102">crypto - fizzbuzz102</h2>
+
+<h3 id="fizzbuzz102py">fizzbuzz102.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#!/usr/local/bin/python
+</span><span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">urandom</span>
+<span class="kn">from</span> <span class="nn">secrets</span> <span class="kn">import</span> <span class="n">randbits</span>
+
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span> <span class="o">+</span> <span class="n">flag</span> <span class="o">+</span> <span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">q</span> <span class="o">=</span> <span class="n">getPrime</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+<span class="n">e</span> <span class="o">=</span> <span class="mh">0x10001</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">assert</span> <span class="n">flag</span> <span class="o">&lt;</span> <span class="n">n</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">randbits</span><span class="p">(</span><span class="mi">845</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">randbits</span><span class="p">(</span><span class="mi">845</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">*</span> <span class="p">(</span><span class="n">b</span> <span class="o">//</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">a</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">a</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">def</span> <span class="nf">lcg</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span>
+
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">n</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">e</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">ct</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">"</span><span class="si">{</span><span class="n">a</span> <span class="o">=</span> <span class="si">}</span><span class="s">"</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">))</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">lcg</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">ct</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="s">""</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">==</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="nb">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Fizz"</span>
+    <span class="k">if</span> <span class="n">pt</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">+=</span> <span class="s">"Buzz"</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">out</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="s">"101"</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now, LCG is added to fizzbuzz101.</p>
+
+<p>I struggled a bit at first, but we can solve this one totally freely with applying 101’s method two times.</p>
+
+<p><code class="language-plaintext highlighter-rouge">b</code> shifts result mod 15, and I was too lazy to deal with all cases, so I just reconnected until <code class="language-plaintext highlighter-rouge">b % 15 == 0</code>.</p>
+
+<p><br /></p>
+
+<p>First, we can discover <code class="language-plaintext highlighter-rouge">a</code>, because we can know <code class="language-plaintext highlighter-rouge">k * a</code>’s fizzbuzz result, it is exactly same with 101.</p>
+
+<p>Second, by multiplying inverse of a when sending, the second step is exactly same with 101 too.</p>
+
+<p><br /></p>
+
+<p>Both <code class="language-plaintext highlighter-rouge">a</code> and <code class="language-plaintext highlighter-rouge">flag</code> has to be relatively prime to 15, so the success rate is (1/15) * (8/15)^2.</p>
+
+<p>Which is around 1/60.</p>
+
+<p><br /></p>
+
+<h3 id="expy-3">ex.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pwn</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span><span class="p">,</span> <span class="n">trange</span>
+
+<span class="n">TEST</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="k">if</span> <span class="n">TEST</span><span class="p">:</span>
+    <span class="n">io</span> <span class="o">=</span> <span class="n">process</span><span class="p">([</span><span class="s">"python3"</span><span class="p">,</span> <span class="s">"fizzbuzz102.py"</span><span class="p">])</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">io</span> <span class="o">=</span> <span class="n">remote</span><span class="p">(</span><span class="s">"be.ax"</span><span class="p">,</span> <span class="mi">31102</span><span class="p">)</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"n = "</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"e = "</span><span class="p">)</span>
+<span class="n">e</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"ct = "</span><span class="p">)</span>
+<span class="n">ct</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">TEST</span><span class="p">:</span>
+    <span class="n">io</span><span class="p">.</span><span class="n">recvuntil</span><span class="p">(</span><span class="s">"a = "</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">())</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">"FizzBuzz"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"unlucky"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">()</span>
+
+<span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">"101"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"unlucky"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">get10</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">to_send</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="n">io</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">io</span><span class="p">.</span><span class="n">recvlines</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="k">if</span> <span class="sa">b</span><span class="s">"FizzBuzz"</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">ret</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="c1"># print(to_send)
+</span>    <span class="c1"># print(ret)
+</span>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">==</span> <span class="n">l</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get10</span><span class="p">(</span><span class="n">to_send</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">:</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]))</span>
+        <span class="c1"># print(len(res))
+</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+<span class="n">tot_len</span> <span class="o">=</span> <span class="mi">1200</span>
+
+<span class="n">to_send</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">to_send</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+
+<span class="n">res_ind</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">res_ind</span><span class="p">.</span><span class="n">append</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">res_ind</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">bs</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">res_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">suc</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_st</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">cur</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span>
+
+        <span class="k">if</span> <span class="n">new_st</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">suc</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">st</span> <span class="o">+</span> <span class="n">new_st</span>
+
+    <span class="k">if</span> <span class="n">suc</span><span class="p">:</span>
+        <span class="n">mya</span> <span class="o">=</span> <span class="n">st</span> <span class="o">*</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span>
+        <span class="k">if</span> <span class="n">st</span> <span class="o">*</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">mya</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">break</span>
+
+<span class="k">if</span> <span class="n">TEST</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="n">mya</span> <span class="o">==</span> <span class="n">a</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">mya</span>
+
+
+
+<span class="k">def</span> <span class="nf">get10_flag</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">to_send</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="n">io</span><span class="p">.</span><span class="n">sendline</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">pow</span><span class="p">(</span><span class="n">k</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="n">ct</span><span class="p">))</span>
+
+    <span class="n">ret</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">l</span><span class="p">):</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">io</span><span class="p">.</span><span class="n">recvlines</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">15</span><span class="p">):</span>
+            <span class="k">if</span> <span class="sa">b</span><span class="s">"FizzBuzz"</span> <span class="ow">in</span> <span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="n">ret</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="mi">15</span> <span class="o">-</span> <span class="n">i</span><span class="p">)</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+                <span class="k">break</span>
+    <span class="c1"># print(to_send)
+</span>    <span class="c1"># print(ret)
+</span>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">==</span> <span class="n">l</span>
+    <span class="k">return</span> <span class="n">ret</span>
+
+<span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="n">to_send</span><span class="p">):</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span> <span class="o">//</span> <span class="mi">10</span><span class="p">):</span>
+        <span class="n">res</span><span class="p">.</span><span class="n">extend</span><span class="p">(</span><span class="n">get10_flag</span><span class="p">(</span><span class="n">to_send</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">:</span><span class="n">i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">10</span><span class="p">]))</span>
+        <span class="c1"># print(len(res))
+</span>
+    <span class="k">return</span> <span class="n">res</span>
+
+
+
+
+
+<span class="n">io</span><span class="p">.</span><span class="n">sendlineafter</span><span class="p">(</span><span class="s">"&gt; "</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">ct</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="o">-</span><span class="n">e</span><span class="p">,</span> <span class="n">n</span><span class="p">)))</span>
+<span class="k">if</span> <span class="sa">b</span><span class="s">"zz"</span> <span class="ow">in</span> <span class="n">io</span><span class="p">.</span><span class="n">recvline</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"unlucky"</span><span class="p">)</span>
+    <span class="nb">exit</span><span class="p">()</span>
+
+
+<span class="n">tot_len</span> <span class="o">=</span> <span class="mi">1200</span>
+
+<span class="n">to_send</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="n">to_send</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">get_flag</span><span class="p">(</span><span class="n">to_send</span><span class="p">)</span>
+
+
+<span class="n">bs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+
+<span class="n">res_ind</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">res_ind</span><span class="p">.</span><span class="n">append</span><span class="p">([])</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+        <span class="n">res_ind</span><span class="p">[</span><span class="n">j</span><span class="p">].</span><span class="n">append</span><span class="p">((</span><span class="n">res</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">bs</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">):</span>
+    <span class="n">st</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="n">cur</span> <span class="o">=</span> <span class="n">res_ind</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">suc</span> <span class="o">=</span> <span class="bp">True</span>
+
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">tot_len</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">new_st</span> <span class="o">=</span> <span class="p">(</span><span class="n">cur</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">cur</span><span class="p">[</span><span class="n">j</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">%</span> <span class="mi">15</span>
+
+        <span class="k">if</span> <span class="n">new_st</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">suc</span> <span class="o">=</span> <span class="bp">False</span>
+            <span class="k">break</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">st</span> <span class="o">+</span> <span class="n">new_st</span>
+
+    <span class="k">if</span> <span class="n">suc</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">st</span> <span class="o">*</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span>
+        <span class="k">if</span> <span class="n">st</span> <span class="o">*</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">**</span><span class="n">tot_len</span> <span class="o">//</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">long_to_bytes</span><span class="p">(</span><span class="n">flag</span><span class="p">))</span>
+
+        <span class="k">break</span>
+
+
+<span class="n">io</span><span class="p">.</span><span class="n">interactive</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{fizzbuzz_1s_4_r4th3r_s1lly_f0rm_0f_l34k4g3_d0nt_y0u_th1nk?n0w_w1th_4dd3d_LCG_f0r_fun!}</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="crypto---qcg-k">crypto - QCG-k</h2>
+
+<h3 id="qcgkpy">qcgk.py</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="n">inverse</span><span class="p">,</span> <span class="n">bytes_to_long</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="k">class</span> <span class="nc">PRNG</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mod</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">coeffs</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">mod</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">mod</span> <span class="o">=</span> <span class="n">mod</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">mod</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">state</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">coeff</span> <span class="o">*</span> <span class="bp">self</span><span class="p">.</span><span class="n">state</span><span class="o">**</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">coeff</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">coeffs</span><span class="p">))</span> <span class="o">%</span> <span class="bp">self</span><span class="p">.</span><span class="n">mod</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">state</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="mi">77897050769654696452572824710099972349639759246855689360228775736949644730457</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">q</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">)</span>
+
+<span class="n">kPRNG</span> <span class="o">=</span> <span class="n">PRNG</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">hsh</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">sha256</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="n">digest</span><span class="p">())</span>
+
+<span class="k">def</span> <span class="nf">sign</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">kPRNG</span><span class="p">.</span><span class="nb">next</span><span class="p">()</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">p</span><span class="p">)</span> <span class="o">%</span> <span class="n">q</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">(</span><span class="n">inverse</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">hsh</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">r</span><span class="p">))</span> <span class="o">%</span> <span class="n">q</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">sign</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">,</span><span class="n">s</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"quotes.txt"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">quote</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="n">quote</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">encode</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">sign</span><span class="p">(</span><span class="n">quote</span><span class="p">))</span>
+
+<span class="n">key</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">encode</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+<span class="n">iv</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">urandom</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"flag.txt"</span><span class="p">,</span> <span class="s">"rb"</span><span class="p">).</span><span class="n">read</span><span class="p">()</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">encrypt</span><span class="p">(</span><span class="n">pad</span><span class="p">(</span><span class="n">flag</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">enc</span><span class="p">.</span><span class="nb">hex</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">iv</span><span class="p">.</span><span class="nb">hex</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>We are given with 17 linear equations with 16 unknown constant coefficients.</p>
+
+<p>And we can represent all values in the equations as polynomial of <code class="language-plaintext highlighter-rouge">x</code> on <code class="language-plaintext highlighter-rouge">F</code>.</p>
+
+<p>All coefficients for each equation is equal, so making it as RREF, last row has to be row of zero.</p>
+
+<p><br /></p>
+
+<p>Then M[16, 16] is a polynomial of <code class="language-plaintext highlighter-rouge">x</code>, but has to be equal to 0, so iterating the polynomial’s all roots by factoring gives us the flag.</p>
+
+<p><br /></p>
+
+<h3 id="exsage">ex.sage</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.number</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">Crypto.Util.Padding</span> <span class="kn">import</span> <span class="n">pad</span>
+<span class="kn">from</span> <span class="nn">Crypto.Cipher</span> <span class="kn">import</span> <span class="n">AES</span>
+<span class="kn">from</span> <span class="nn">hashlib</span> <span class="kn">import</span> <span class="n">sha256</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span>
+
+
+<span class="k">def</span> <span class="nf">hsh</span><span class="p">(</span><span class="n">msg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">bytes_to_long</span><span class="p">(</span><span class="n">sha256</span><span class="p">(</span><span class="n">msg</span><span class="p">).</span><span class="n">digest</span><span class="p">())</span>
+
+<span class="n">hs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"quotes.txt"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">quote</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="n">quote</span><span class="p">.</span><span class="n">strip</span><span class="p">().</span><span class="n">encode</span><span class="p">()</span>
+
+        <span class="n">hs</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">hsh</span><span class="p">(</span><span class="n">quote</span><span class="p">))</span>
+
+<span class="n">q</span> <span class="o">=</span> <span class="mi">77897050769654696452572824710099972349639759246855689360228775736949644730457</span>
+<span class="n">p</span> <span class="o">=</span> <span class="p">...</span>
+<span class="n">g</span> <span class="o">=</span> <span class="p">...</span>
+
+<span class="n">F</span> <span class="o">=</span> <span class="n">GF</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+
+<span class="n">P</span><span class="p">.</span><span class="o">&lt;</span><span class="n">x</span><span class="o">&gt;</span> <span class="o">=</span> <span class="n">PolynomialRing</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">"out-4.txt"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span>
+
+<span class="n">k</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">18</span><span class="p">):</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">readline</span><span class="p">())</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">hs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="n">k</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">h</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">r</span><span class="p">)</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+
+<span class="n">M</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">17</span><span class="p">):</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+        <span class="n">line</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">^</span><span class="n">j</span><span class="p">)</span>
+    <span class="n">line</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">M</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">17</span><span class="p">):</span>
+        <span class="n">to_mul</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">17</span><span class="p">):</span>
+            <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">M</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">k</span><span class="p">]</span> <span class="o">-</span> <span class="n">to_mul</span> <span class="o">*</span> <span class="n">M</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">k</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">16</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">M</span><span class="p">[</span><span class="mi">16</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="n">xs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">fac</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">M</span><span class="p">[</span><span class="mi">16</span><span class="p">][</span><span class="mi">16</span><span class="p">].</span><span class="n">factor</span><span class="p">()):</span>
+    <span class="n">f</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">fac</span>
+    <span class="k">if</span> <span class="n">f</span><span class="p">.</span><span class="n">degree</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+        <span class="k">continue</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">key</span> <span class="o">=</span> <span class="n">sha256</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">).</span><span class="n">encode</span><span class="p">()).</span><span class="n">digest</span><span class="p">()</span>
+    <span class="n">iv</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">"bf549fa30bef66988268f357e1014c8d"</span><span class="p">)</span>
+    <span class="n">ct</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s">"5c9d830f422288b4a9a37dc6b1cf68bfb7ee1acadb428d9fee6b17a8b8cbc5e7d871314bf090e4faa083d68162414b72992a60119ceb9c67f928d224f44f14c5"</span><span class="p">)</span>
+    <span class="n">cipher</span> <span class="o">=</span> <span class="n">AES</span><span class="p">.</span><span class="n">new</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">AES</span><span class="p">.</span><span class="n">MODE_CBC</span><span class="p">,</span> <span class="n">iv</span><span class="p">)</span>
+
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">cipher</span><span class="p">.</span><span class="n">decrypt</span><span class="p">(</span><span class="n">ct</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="sa">b</span><span class="s">"corctf{"</span> <span class="ow">in</span> <span class="n">flag</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{wh4t_d0_y0u_m34n_1_C4Nt_jU5t_4dd_m0re_c03FFs?!??!?!????}</code></p>
+
+<p>It is basically the same, but alternative possible solution is to calculate the determinant, and finding roots of it.</p>
+
+<p><br /><br /></p>
+
+<h2 id="misc---msfrogofwar2">misc - msfrogofwar2</h2>
+
+<p>My teammate <code class="language-plaintext highlighter-rouge">boo</code> discovered that, by sending <code class="language-plaintext highlighter-rouge">socket.emit("move", "b2b4Q")</code> to the console transforms pawn into king.</p>
+
+<p>But we couldn’t transform pawns into queens.</p>
+
+<p>With 9 kings the winning rate is almost 100% already, but the problem is 20 turns limit.</p>
+
+<p><br /></p>
+
+<p>Fortunately I managed to avoid frog’s castling, and made a checkmate in 10 turns.</p>
+
+<p><img src="../files/corctf/chess.png" alt="Untitled" /></p>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{If you know the enemy and know yourself, you need not fear the croaks of a hundred frogs - Sun Tzu}</code></p>
+
+<p><br /><br /></p>
+
+<h2 id="misc---touch-grass">misc - touch-grass</h2>
+
+<p><img src="../files/corctf/grass.png" alt="Untitled" /></p>
+
+<p>:))</p>
+
+<p><code class="language-plaintext highlighter-rouge">corctf{i_hope_you_d1dnt_have_a_gr4ss_allergy}</code></p>
+
+
+</article>
+
+
+      </div>
+    </main>
+  </body>
+</html>
