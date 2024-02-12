@@ -3,31 +3,27 @@ layout: page
 title: haari.me.soon
 ---
 
-<br>
+Admin finally found `haari.me` some usage! He decided to upload his CTF challenges, and connect a server so that anyone can solve them anytime.
 
-Admin thinks that he should do something with the main domain:
+Don't DDoS plz :(
 
-<font size="5em">"haari.me"</font> 
+### 2024
 
-Since this blog is on a subdomain.
+<!--
+|Name|Info|Difficulty|CTF|Concept|
+|---|---|---|---|---|
+-->
+upcoming...(hopefully)
 
-.
-<br>
-.
-<br>
-.
-<br>
 
-So he will deal with "haari.me" soon.
+### 2023
 
-<font size="15em">HAHAHAHAHAAAAHAHAHAAHAHAHAHAHAHAHHHHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHAHA:pepe_excited:HAHAAHAAHAHA</font>
+|Name|Info|Difficulty|CTF|Concept|
+|---|---|---|---|---|
+|[Christmas tree seedling](http://soon.haari.me/haarime/christmas_tree_seedling/)|Crypto, 5 solves|Medium|2023 Christmas CTF|Mersenne Twister's seeding algorithm|
+|[slyfizzbuzz](https://soon.haari.me/haarime/slyfizzbuzz/)|Crypto, 0 solves|Medium|2023 Hspace League|Mersenne Twister|
 
-Maybe a small crypto challenge with a small prize(fried chicken) would be nice.
+<br><br><br><br><br><br>
 
-gogo (nothing there yet)--> [haari.me](https://haari.me/)
-
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-By the way, if you enjoyed my fascinating quality joke, and want to know more about me,
-
-You might want to check this out: [Explode your device](https://blog.naver.com/rlaalstns88/)
+Oh by the way, do you miss the old `haari.me.soon` post?
+[haari.me.soon](../old_haarime)
