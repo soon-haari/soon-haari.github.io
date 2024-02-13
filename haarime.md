@@ -9,23 +9,21 @@ Don't DDoS plz :(
 
 You can also find all these challenges in [GitHub](https://github.com/soon-haari/my-ctf-challenges).
 
-<br><br>
+<br>
 
 ### 2024
 
-<!--
-|Name|Info|Difficulty|CTF|Concept|
-|---|---|---|---|---|
--->
 upcoming...(hopefully)
 
+<br>
 
-### 2023
+### 2023 Christmas CTF
 
-|Name|Info|Difficulty|CTF|Concept|
-|---|---|---|---|---|
-|[Christmas tree seedling](http://soon.haari.me/haarime/christmas_tree_seedling/)|Crypto, 5 solves|Medium|2023 Christmas CTF|Mersenne Twister's seeding algorithm|
-|[slyfizzbuzz](https://soon.haari.me/haarime/slyfizzbuzz/)|Crypto, 0 solves|Medium|2023 Hspace League|Mersenne Twister|
+- [Christmas tree seedling](http://soon.haari.me/haarime/christmas_tree_seedling/) - Crypto
+
+### 2023 HSpace League
+
+- [slyfizzbuzz](https://soon.haari.me/haarime/slyfizzbuzz/) - Crypto
 
 <br><br><br><br><br><br>
 
