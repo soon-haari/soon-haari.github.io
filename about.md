@@ -11,7 +11,7 @@ Name: 김민순(Minsun Kim)
 
 Birth: 2004.04.22
 
-Currently working at [theori.io](https://theori.io)
+Currently working at nowhere, please contact :(
 
 <br>
 
@@ -24,7 +24,7 @@ School:
 - Korea University (2022 ~ Current)
 
 Experiences:
-- Theori Dreamhack Intern Researcher (2023.09 ~ Current)
+- Theori Dreamhack Intern Researcher (2023.09 ~ 2024.02)
 
 <br><br>
 
