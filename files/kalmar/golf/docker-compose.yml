@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  mathgolf-warmup:
+    build: ./hosting
+    ports:
+     - 3470:3470
+    restart: unless-stopped
