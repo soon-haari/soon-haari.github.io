@@ -8,7 +8,7 @@ permalink: /integral-of-1-x5-1
 
 While I was meaninglessly scrolling reels of Instagram, this showed up.
 
-<img src="/files/integral/screenshot.png" width="220" height="476" />
+<img src="/files/integral/screenshot.png" width="220" />
 
 Well, if that showed up on the exam, what else we gonna do?
 
@@ -24,7 +24,7 @@ into sum of fractions with 1-degreed denominator.
 
 For test if my scenario would actually work, I tested with $\int_{0}^{1}\frac{1}{x^2 + 1}$.
 
-<img src="/files/integral/solvingtan.png" width="400" height="476" />
+<img src="/files/integral/solvingtan.png" width="400" />
 
 It nicely resulted as $\frac{\pi}{4}$.
 

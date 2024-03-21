@@ -1,6 +1,7 @@
 ---
 layout: post
 category: studies
+title: "SusCipher(2023 ACSC Quals)"
 ---
 
 <br><br>

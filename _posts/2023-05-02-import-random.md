@@ -1,6 +1,7 @@
 ---
 layout: post
 category: studies
+title: "import random"
 ---
 
 <br><br>

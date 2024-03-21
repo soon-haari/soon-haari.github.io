@@ -1,6 +1,7 @@
 ---
 layout: post
 category: writeup
+title: "2023 Codegate Quals"
 ---
 
 With Team "Корея! Ура!"

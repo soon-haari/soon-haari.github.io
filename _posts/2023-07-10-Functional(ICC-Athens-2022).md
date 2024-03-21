@@ -1,6 +1,7 @@
 ---
 layout: post
 category: studies
+title: "Functional(2022 ICC Athens)"
 ---
 
 <br><br>

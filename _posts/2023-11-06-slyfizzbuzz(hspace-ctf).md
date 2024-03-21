@@ -1,9 +1,10 @@
 ---
 layout: post
 category: studies
+title: "Slyfizzbuzz(HSPACE CTF)"
 ---
 
-I co-authored a challenge with `ks` for Hspace CTF, which was Belluminar-type.
+I co-authored a challenge with `ks` for HSPACE CTF, which was Belluminar-type.
 
 No team solved it during the CTF, but `Jinseo Kim` and `diff` from `GoN` solved it after the CTF ended.
 
