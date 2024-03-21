@@ -56,7 +56,7 @@ let songs = [
 	["Maybe I struggled by the lines and I don't need to say", "https://open.spotify.com/track/4Wi5YeExODRDiBlaIEGl7c"],
 	["And you showin' off, but it's alright", "https://open.spotify.com/track/3CA9pLiwRIGtUBiMjbZmRw"],
 	["You remind me of the color blue", "https://open.spotify.com/track/1OubIZ0ARYCUq5kceYUQiO"],
-	["'Cause we could stay at home and watch the sunset", "https://open.spotify.com/track/57RA3JGafJm5zRtKJiKPIm"],
+	["But if I never lose this frown shit, will I have lost you?", "https://open.spotify.com/track/73ekBE1ZHp8ySUaX0YdCtR"],
 	//45
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
