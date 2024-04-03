@@ -11,8 +11,6 @@ Name: 김민순(Minsun Kim)
 
 Birth: 2004.04.22
 
-Currently working at nowhere, please contact :(
-
 <br>
 
 Contact:
@@ -24,7 +22,8 @@ School:
 - Korea University (2022 ~ Current)
 
 Experiences:
-- Theori Dreamhack Intern Researcher (2023.09 ~ 2024.02)
+- [Theori](https://theori.io/) Dreamhack Intern Researcher &nbsp;&nbsp;&nbsp;&nbsp; (2023.09 ~ 2024.02)
+- [Zellic](https://www.zellic.io/) Zero-Knowledge Intern Researcher (2023.04 ~ )
 
 <br><br>
 
