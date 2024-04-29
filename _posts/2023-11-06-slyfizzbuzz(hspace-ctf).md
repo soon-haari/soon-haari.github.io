@@ -1,7 +1,7 @@
 ---
 layout: post
 category: studies
-title: "Slyfizzbuzz(HSPACE CTF)"
+title: "Slyfizzbuzz"
 ---
 
 I co-authored a challenge with `ks` for HSPACE CTF, which was Belluminar-type.
