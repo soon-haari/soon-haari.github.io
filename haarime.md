@@ -11,9 +11,9 @@ You can also find all these challenges in [GitHub](https://github.com/soon-haari
 
 <br>
 
-### 2024
+### 2024 Dreamhack Invitational Quals
 
-upcoming...(hopefully)
+- [f, l and ag](http://soon.haari.me/haarime/flandag/) - Crypto
 
 <br>
 
