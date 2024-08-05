@@ -29,6 +29,8 @@ Experiences:
 
 Organized CTFs:
 - 2023 Christmas CTF
+- 2024 .HACK(Dreamhack Invitational)
+- 2024 Cyber Conflict Exercise
 
 Playing CTFs with:
 - CyKor

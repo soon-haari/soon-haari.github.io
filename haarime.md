@@ -11,6 +11,10 @@ You can also find all these challenges in [GitHub](https://github.com/soon-haari
 
 <br>
 
+### 2024 Cyber Conflict Exercise
+
+- [🔀](http://soon.haari.me/haarime/swap/) - Crypto
+
 ### 2024 Dreamhack Invitational Quals
 
 - [f, l and ag](http://soon.haari.me/haarime/flandag/) - Crypto
