@@ -17,7 +17,7 @@ I specialize in cryptography.
 Contact:
 - [Email](mailto:alstns.040422@gmail.com/)
 - [Discord](http://discordapp.com/users/754753564487843861/)
-- [X(Twitter)](https://x.com/___ahpuh)
+- [X(Twitter)](https://x.com/ahpu_h)
 
 Experiences:
 - [Zellic](https://www.zellic.io/) Zero-Knowledge Internship 
@@ -31,6 +31,7 @@ Organized CTFs:
 - 2023 Christmas CTF
 - 2024 .HACK(Dreamhack Invitational)
 - 2024 Cyber Conflict Exercise
+- 2024 Codegate
 
 Playing CTFs with:
 - CyKor
