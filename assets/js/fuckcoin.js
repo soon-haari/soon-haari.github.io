@@ -2,14 +2,14 @@ const serverUrl = "https://api.upbit.com";
 const amount = 4184924293.29221859;
 async function fetchData() {
     try {
-      const response = await fetch(`${serverUrl}/v1/ticker?markets=KRW-BTT`);
+      const response = await fetch(`http://18.216.129.150:5000/`);
+      console.log(response)
+      
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      const price = data[0]["trade_price"];
-      const money = price * amount;
-      return money; // Save the data in a variable and return it
+      return data; // Save the data in a variable and return it
     } catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
@@ -31,5 +31,5 @@ function wait(ms) {
 
 while(true){
     myfunc();
-    await wait(1000);
+    await wait(5000);
 }
