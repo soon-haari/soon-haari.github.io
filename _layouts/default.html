@@ -17,5 +17,19 @@
         <script type="text/javascript" src="{{ site.baseurl }}/assets/js/{{ js_file }}.js"></script>
       {% endfor %}
     {% endif %}
+
+    {% if page.money %}
+      {% for js_file in page.money %}
+      
+        <center>
+          <p>This fucking idiot put 10M₩ into coins for fun, and only have</p>
+          <font size="15em">
+            <div id="money-display"></div>
+            <script src="{{ site.baseurl }}/assets/js/{{ js_file }}.js" type="module" defer></script>
+          </font>
+          <p>left!!</p>
+        </center>
+      {% endfor %}
+    {% endif %}
   </body>
 </html>
