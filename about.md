@@ -13,7 +13,7 @@ My name is Minsun Kim(김민순), and I am a 20 years old undergraduate student.
 <br>
 
 Contact:
-- [Email](mailto:alstns.040422@gmail.com/)
+- [soon@haari.me](mailto:soon@haari.me/)
 - [Discord](http://discordapp.com/users/754753564487843861/)
 - [X(Twitter)](https://x.com/ah_p_uh)
 

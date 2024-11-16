@@ -1,8 +1,7 @@
-const serverUrl = "https://api.upbit.com";
 const amount = 4184924293.29221859;
 async function fetchData() {
     try {
-      const response = await fetch(`http://18.216.129.150:5000/`);
+      const response = await fetch(`http://coin.haari.me:5000/`);
       console.log(response)
       
       if (!response.ok) {
