@@ -5,7 +5,7 @@ title: me.soon.haari
 
 <font size="5em">Me. soon_haari.</font>
 
-My name is Minsun Kim(김민순), and I am a 20 years old undergraduate student.
+My name is Minsun Kim(김민순), and I am a 21 years old undergraduate student.
 
 <br>
 🎓:
