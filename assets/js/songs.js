@@ -58,6 +58,7 @@ let songs = [
 	["You remind me of the color blue", "https://open.spotify.com/track/1OubIZ0ARYCUq5kceYUQiO"],
 	["But if I never lose this frown shit, will I have lost you?", "https://open.spotify.com/track/73ekBE1ZHp8ySUaX0YdCtR"],
 	//45
+	["A dollar might just fuck your main bitch", "https://open.spotify.com/track/0UtnpKaReKUg2GquaSxCyD"],
 ]
 song = songs[Math.floor(Math.random() * songs.length)]
 link = song[1]
