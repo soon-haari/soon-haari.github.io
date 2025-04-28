@@ -5,6 +5,7 @@ title: My presentation posts for the uni subject 'capstone'
 
 - [Contributing to SageMath 7](/c7)
 - [Contributing to SageMath 8](/c8)
+- [Contributing to SageMath 9](/c9)
 - [Contributing to SageMath 10](/c10)
 
 

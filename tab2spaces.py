@@ -1,6 +1,7 @@
 import os
 
 dirname = "_posts/"
+# dirname = "capstone/"
 
 post_list = os.listdir(dirname)
 
