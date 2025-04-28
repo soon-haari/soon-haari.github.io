@@ -31,4 +31,5 @@ Organized CTFs:
 - 2024 Cyber Conflict Exercise
 - 2024 Codegate CTF
 - 2024 Blue Water CTF
+- 2025 Codegate CTF
 - [My CTF challenges](https://github.com/soon-haari/my-ctf-challenges)
