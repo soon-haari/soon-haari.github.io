@@ -2,7 +2,7 @@
 layout: post
 category: capstone
 title: "Contributing to SageMath (팀 \"이태관\"(중요))"
-permalink: /c7
+permalink: /c7/index
 ---
 
 For capstone class(2025/5/2).
