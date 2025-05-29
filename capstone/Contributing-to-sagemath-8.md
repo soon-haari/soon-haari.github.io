@@ -430,7 +430,7 @@ s, t, r = map(P, [s, t, r])
 ```
 
 Some things to note:
-- Generally xgcd function's result r, s, t satisfies r = a*s + b*t, however gcdext function gives order differently so that return value s, t, r still satisfies r = a*s + b*t.
+- Generally xgcd function's result r, s, t satisfies r = a\*s + b\*t, however gcdext function gives order differently so that return value s, t, r still satisfies r = a\*s + b\*t.
 - The result of gcd is generally always in the monic form, but PARI's gcd/gcdext function still leaves a leading coefficient behind.
 
 

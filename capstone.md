@@ -7,6 +7,8 @@ title: My presentation posts for the uni subject 'capstone'
 - [Contributing to SageMath 8](/c8)
 - [Contributing to SageMath 9](/c9)
 - [Contributing to SageMath 10](/c10)
+- [Contributing to SageMath 11](/c11)
+- [Contributing to SageMath 12](/c12)
 
 
 <style>
