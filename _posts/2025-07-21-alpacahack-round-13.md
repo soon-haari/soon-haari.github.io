@@ -242,34 +242,37 @@ print("Welcome to the Polynomial Puzzle!")
 print(f"f(x) is a univariate degree {d} polynomial with coefficients in K = {K}")
 
 for _ in range(d + 3):
-	x = next_prime(K.random_element())
-	mixed = [K.random_element() for _ in "apch"]
-	mixed[1] = f(x) - mixed[0]
-	shuffle(mixed)
-	print(f"f({x}) is sum of some two values of {mixed}")
+    x = next_prime(K.random_element())
+    mixed = [K.random_element() for _ in "apch"]
+    mixed[1] = f(x) - mixed[0]
+    shuffle(mixed)
+    print(f"f({x}) is sum of some two values of {mixed}")
 
 guess = int(input("What is f(42)?\n> "))
 if guess == f(42):
-	print(f"You won! The flag is {os.environ.get("FLAG", "fakeflag")}")
+    print(f"You won! The flag is {os.environ.get("FLAG", "fakeflag")}")
 else:
-	print("You lost :(")
+    print("You lost :(")
 ```
 
 I first failed to solve this during LakeCTF finals this year (LOL), but my GOAT genni cooked it with LLL, and I thought it was quite clever, and made this revenge challenge.
 
 SADLY, the winner chocorusk used MITM which was unintended, and also my skill issue.
 
-<img src="../files/alpaca13/sceleri.png" width="600"/>
+<img src="../files/alpaca13/sceleri.png" width="500"/>
 
-<img src="../files/alpaca13/neo2.png" width="600"/>
+<img src="../files/alpaca13/neo2.png" width="500"/>
 
 My life...
 
 But still I'm happy to see the following:
 
-<img src="../files/alpaca13/yu.png" width="600"/>
-<img src="../files/alpaca13/ntr.png" width="600"/>
-<img src="../files/alpaca13/ntr2.png" width="600"/>
+<img src="../files/alpaca13/yu.png" width="500"/>
+
+<img src="../files/alpaca13/ntr.png" width="500"/>
+<img src="../files/alpaca13/ntr2.png" width="500"/>
+
+<img src="../files/alpaca13/genni.png" width="500"/>
 
 ~~Neobeo, the old man suspiciously knows **ntr-opy** very well...~~
 
