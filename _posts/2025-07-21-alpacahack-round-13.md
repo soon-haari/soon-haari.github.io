@@ -314,7 +314,7 @@ $</center>
 
 In this form of lattice, we can fully force the constraint of $_4C_2$, and make the 6th value of the reduced vector only the sum of two value sin $v_0, v_1, v_2, v_3$.
 
-But this kinda makes the matrix larger, and I chose to only variable-ize 3 of them instead of 4, and make $a_3 = 2 - (a_0 + a_1 + a_2)$, and force $a_0, a_1, a_2$ to be in [0, 1]. This reduces the number of variable from 4 to 3, however $2^3 = 8$ possibilities instead of 6. $8^23$ is 69 bits, so it is in a very tight range.
+But this kinda makes the matrix larger, and I chose to only variable-ize 3 of them instead of 4, and make $a_3 = 2 - (a_0 + a_1 + a_2)$, and force $a_0, a_1, a_2$ to be in [0, 1]. This reduces the number of variable from 4 to 3, however $2^3 = 8$ possibilities instead of 6. $8^{23}$ is 69 bits, so it is in a very tight range.
 
 Some extra notes to deal with tight range:
 - My solution uses two LLL, first one is done very quickly and doesn't even need that much precision.
