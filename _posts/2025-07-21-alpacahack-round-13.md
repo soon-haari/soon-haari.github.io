@@ -316,6 +316,10 @@ In this form of lattice, we can fully force the constraint of $_4C_2$, and make 
 
 But this kinda makes the matrix larger, and I chose to only variable-ize 3 of them instead of 4, and make $a_3 = 2 - (a_0 + a_1 + a_2)$, and force $a_0, a_1, a_2$ to be in [0, 1]. This reduces the number of variables from 4 to 3, however $2^3 = 8$ possibilities instead of 6. $8^{23}$ is 69 bits, so it is in a very tight range.
 
+> EDIT AFTER POSTING) **But this kinda makes the matrix larger** This line is somehow true and somehow may not matter much, can you find a better solution via lattice than the current solve code?
+
+<br>
+
 Some extra notes to deal with the tight range:
 - My solution uses two LLL, the first one is done very quickly and doesn't even need that much precision.
 - The second LLL is important, I used SageMath's BKZ(block_size=40) for a 70x70 size matrix. Note that $70 = 23 * 3 + 1$.
