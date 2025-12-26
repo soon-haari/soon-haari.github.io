@@ -19,7 +19,7 @@ Contact:
 
 Experiences:
 - [Zellic](https://www.zellic.io/) Zero-Knowledge Internship 
-	- (2024.04 ~ )
+	- (2024.04 ~ 2025.06)
 - [Theori](https://theori.io/) Dreamhack Contents Internship
 	- (2023.09 ~ 2024.02)
 

@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="../files/hamstatic/rose.webp" type="image/x-icon">
+    <title>HammingDiet</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fira+Code&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+        font-family : 'Source Code Pro';
+        src : url('../assets/css/fonts/SourceCodePro-VariableFont_wght.ttf')
+        }
+
+        @font-face {
+        font-family : 'NotoSans';
+        src : url('../assets/css/fonts/NotoSansKR-Regular.otf')
+        }
+        body {
+            background-color: #000;
+            color: #0f0;
+            font-family: 'Press Start 2P', monospace;
+            text-align: center;
+            padding-top: 50px;
+        }
+
+
+
+        h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #0f0;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            background: #111;
+            color: #0f0;
+            border: 2px solid #0f0;
+            padding: 10px;
+            width: 300px;
+            font-family: inherit;
+        }
+
+        button {
+            background: #0f0;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 0 10px #0f0;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: #1f1;
+            box-shadow: 0 0 20px #0f0;
+        }
+
+        @keyframes float {
+            0%   { transform: translateY(0); }
+            50%  { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 14px;
+            color: rgb(0, 255, 8);
+            font-family: 'Press Start 2P', monospace;
+            white-space: pre-wrap;
+            animation: float 2s ease-in-out infinite;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        .star {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0;
+            animation: fadeOut 2s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                transform: scale(var(--scale, 1));
+            }
+            100% {
+                opacity: 0;
+                transform: scale(calc(var(--scale, 1) * 1.2));
+            }
+        }
+
+         #bestScore { display: inline-flex; align-items: center; gap: 8px; white-space: normal; }
+        .trophy { height: 60px; vertical-align: middle; image-rendering: pixelated; }
+
+        #snow {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        #ground {
+            position: fixed;
+            bottom: calc(00px + 7vw);
+            transform: translateY(35%);
+
+            left: -1vw;
+            width: 105%;
+            height: auto;
+
+            pointer-events: none;
+            z-index: 99999;
+        }
+
+        .hud {
+            position: fixed;
+            top: 24px;
+
+            font-size: 14px;
+            letter-spacing: 0.04em;
+            opacity: 0.85;
+            z-index: 9999;
+            pointer-events: none;
+            }
+
+            .hud.left {
+            left: 28px;
+            color: #9cff9c;
+            }
+
+            .hud.right {
+            right: 28px;
+            color: #ffffff;
+            }
+
+            .hud.link {
+            pointer-events: auto;
+            cursor: pointer;
+            text-decoration: none;
+            }
+            .hud.link:hover {
+            text-shadow: 0 0 8px rgba(200, 200, 255, 0.6);
+            }
+
+            .img1 {
+            position: absolute;
+            top: 240px;
+            left: calc(-400px + 50vw);
+            width: 250px;
+            z-index: 10;
+            pointer-events: none;
+            }
+
+            .img2 {
+            position: absolute;
+            top: 320px;
+            left: calc(+200px + 50vw);
+            width:350px;
+            z-index: 10;
+            pointer-events: none;
+            }
+
+            .img3 {
+            position: absolute;
+            top: 410px;
+            left: calc(-410px + 50vw);
+            width: 250px;
+            z-index: 10;
+            pointer-events: none;
+            }
+
+            .img4 {
+            position: absolute;
+            top: 620px;
+            left: calc(-250px + 50vw);
+            width: 500px;
+            z-index: 10;
+            pointer-events: none;
+            }
+
+            .img5 {
+            position: absolute;
+            top: 800px;
+            left: calc(-243px + 50vw);
+            width: 500px;
+            z-index: 10;
+            pointer-events: none;
+            }
+
+            .img6 {
+            position: absolute;
+            top: 200px;
+            left: calc(-843px + 50vw);
+            width: 400px;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.2;
+            }
+
+            .img7 {
+            position: absolute;
+            top: 550px;
+            left: calc(353px + 50vw);
+            width: 400px;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.2;
+            }
+
+            .img8 {
+            position: absolute;
+            top: 950px;
+            left: calc(353px + 50vw);
+            width: 350px;
+            z-index: 10;
+            pointer-events: none;
+            opacity: 0.2;
+            }
+
+            .img9 {
+            position: absolute;
+            top: 2500px;
+            left: calc(-800px + 50vw);
+            width: 1400px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.2;
+            }
+
+            .cmp {
+            position: relative;
+            z-index: 10;
+            }
+
+
+            .left    { text-align: left; }
+            .center  { text-align: center; }
+            .right   { text-align: right; }
+            .justify { text-align: justify; }
+
+            .post {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 20px;
+            font-family: 'Source Code Pro', 'NotoSans';
+            color: #eaeaea;
+            }
+            .post a {
+            color: #05df60;
+            }
+
+            .post a:hover {
+            color: #c9f8c9;
+            }
+
+            .post a:visited {
+            color: #fdf500;
+            }
+
+
+    </style>
+</head>
+
+<script>
+    function spawnStar() {
+        const star = document.createElement("img");
+        let isStar = false;
+
+        const r = Math.random() * 3;
+        if (r > 1){
+            star.src = "../files/hamstatic/star.png";
+            isStar = true;
+        } else if (r > 3/4) {
+            star.src = "../files/hamstatic/soon.png";
+        } else if (r > 2/4) {
+            star.src = "../files/hamstatic/socks.png";
+        } else if (r > 1/4) {
+            star.src = "../files/hamstatic/present.png";
+        } else {
+            star.src = "../files/hamstatic/hat.webp";
+        } 
+
+        star.className = "star";
+        star.className = "star";
+
+        size = 16 + Math.random() * 240;
+        if (!isStar){
+            size *= 0.7
+        }
+        const x = Math.random() * window.innerWidth;
+        const y = Math.random() * window.innerHeight;
+        const scale = 0.5 + Math.random() * 1.5;
+        const duration = (!isStar) ? 8 : 1.0 + Math.random() * 3.0;
+
+        star.style.left = `${x}px`;
+        star.style.top = `${y}px`;
+        star.style.width = `${size}px`;
+        star.style.setProperty('--scale', scale);
+
+        document.body.appendChild(star);
+
+        setTimeout(() => {
+            star.remove();
+        }, duration * 1000);
+    }
+
+    setInterval(spawnStar, 300);
+</script>
+
+
+<body>
+    <a href="../" class="hud left link">cd ~</a>
+    <div class="hud right">soon_haari&nbsp;2025-12-25</div>
+
+    <img id="ground" src="../files/hamstatic/ground.png" alt="" />
+
+    <canvas id="snow" aria-hidden="true"></canvas>
+
+    
+    <h2>
+      HammingDiet
+      <img src="../files/hamstatic/rose.png" alt="rose"
+     style="
+        height: 2em;
+        vertical-align: middle;
+        image-rendering: pixelated;
+        filter: brightness(3) drop-shadow(0 0 6px #0f0);
+        margin-top: -18px;
+        margin-left: -15px;
+     ">
+
+
+    </h2>
+
+    <h4>2025-12-24 10:00 <br><br>~ 2025-12-26 10:00 (UTC+9)</h4>
+
+    <pre id="result" style="white-space: pre-wrap;"></pre>
+
+    <img src="../files/hamstatic/6h18m.png" class="img1" alt="">
+    <img src="../files/hamstatic/best.png" class="img2" alt="">
+    <img src="../files/hamstatic/also.png" class="img3" alt="">
+    <img src="../files/hamstatic/maple.png" class="img4" alt="">
+    <img src="../files/hamstatic/a.png" class="img5" alt="">
+
+    <img src="../files/hamstatic/g1.png" class="img6" alt="">
+    <img src="../files/hamstatic/g2.png" class="img7" alt="">
+    <img src="../files/hamstatic/arr.png" class="img8" alt="">
+
+    <img src="../files/hamstatic/path.png" class="img9" alt="">
+
+    <div style="margin-top: 20px; font-size: 25px; color: #0ff; white-space: pre-wrap;">Solvers</div>
+    
+    <div id="trophy" style="margin-top: 20px; font-size: 20px; color: #0ff; white-space: pre-wrap;"><img src="../files/hamstatic/blood.png" alt="trophy" class="trophy"> shpark <img src="../files/hamstatic/blood.png" alt="trophy" class="trophy"></div>
+    <div id="blood" style="margin-top: 20px; font-size: 20px; color: #0ff; white-space: pre-wrap;"><img src="../files/hamstatic/trophy.png" alt="trophy" class="trophy"> sean9892 <img src="../files/hamstatic/trophy.png" alt="trophy" class="trophy"></div>
+    <br>
+    <div id="blood" style="margin-top: 20px; font-size: 20px; color: #0ff; white-space: pre-wrap;"> lydxn, hiikunZ </div>
+    <br><br><br><br><br>
+
+    <div style="margin-top: 20px; font-size: 25px; color: #0ff; white-space: pre-wrap;">Honorable mentions</div>
+    <div id="blood" style="margin-top: 20px; font-size: 20px; color: #0ff; white-space: pre-wrap;"> pandas </div>
+    <br><br><br><br><br><br><br><br><br>
+    <div id="blood" style="margin-top: 20px; font-size: 20px; color: #0ff; white-space: pre-wrap;"> Mard </div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+    <pre id="result" style="white-space: pre-wrap;">jerryctf{Thanks_MapleCTF2023!_Email_soon@haari.me_or_DM_ah.puh_on_discord<br>_and_tell_me_your_favorite_song_for_christmas}</pre>
+    <br><br><br><br><br><br>
+    <div style="margin-top: 20px; font-size: 25px; color: #0ff; white-space: pre-wrap;">Some words</div>
+    <br>
+    
+    <script>
+    (function () {
+        const canvas = document.getElementById("snow");
+        const ctx = canvas.getContext("2d", { alpha: true });
+
+        function resize() {
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = window.innerWidth * dpr;
+            canvas.height = window.innerHeight * dpr;
+            canvas.style.width = window.innerWidth + "px";
+            canvas.style.height = window.innerHeight + "px";
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        const flakes = [];
+        const N = 180;
+
+        const rand = (a, b) => a + Math.random() * (b - a);
+
+        for (let i = 0; i < N; i++) {
+            flakes.push({
+                x: rand(0, innerWidth),
+                y: rand(-innerHeight, 0),
+                r: rand(0.8, 5.8),
+                vx: rand(-0.3, 0.3),
+                vy: rand(0.6, 2.0),
+                phase: rand(0, Math.PI * 2),
+                alpha: rand(0.4, 0.9)
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, innerWidth, innerHeight);
+            for (const f of flakes) {
+                f.phase += 0.01;
+                f.x += f.vx + Math.sin(f.phase) * 0.2;
+                f.y += f.vy;
+
+                if (f.y > innerHeight) {
+                    f.y = -10;
+                    f.x = rand(0, innerWidth);
+                }
+
+                ctx.globalAlpha = f.alpha;
+                ctx.beginPath();
+                ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+                ctx.fillStyle = "#fff";
+                ctx.fill();
+            }
+            ctx.globalAlpha = 1;
+            requestAnimationFrame(draw);
+        }
+        draw();
+    })();
+    </script>
+
+    
+
+    <main class="post">
+    <img src="../files/hamstatic/chall.png" alt="" width=600px>
+
+    <p class="justify">
+        I created this challenge and Neobeo helped me playtest this more than an year ago. It was (of course) initiated from playing the challenge <a href="https://github.com/ubcctf/maple-ctf-2023-public/tree/main/misc/coinflip" target="_blank" rel="noopener">Coinflip</a> from MapleCTF 2023. I spend some time to find a better seed for this challenge.
+    </p>
+    <p class="justify">
+        The original solution was making a single bit, the seed-forced bit to one and all the other zero, which works because the bit spreads every twist, but not dramatically. This solution gives the result 1824222, which is not enough for a solve.
+    </p>
+
+    <p class="justify">
+        To solve the challenge, as all solvers know, the key is to make small hammingweight in the middle state, not the first. According to the construction, the inverse spreading speed is higher than the original spreading speed, but still not ignorably high. This drawing is the simple explanation of the solution.
+    </p>
+
+    <p class="justify">
+        Every solutions were based on setting a single index nonzero. A single bit with 0x80000000 can make up to 1599320, and unexpectedly, 0x6422c37e can make up to 1586822. See <a href="https://github.com/soon-haari/my-ctf-challenges/tree/main/2025-hammingdiet/solve/ex.py" target="_blank" rel="noopener">solve.py</a> for getting the seed for both solutions.
+    </p>
+
+    <br>
+
+    <p class="justify">
+        Then, it makes sense that a single bit can make the state hammingweight small, but what's up with 0x6422c37e? A fun fact is that lydxn actually was the first person to come up with the initial value 0x6422c37e, but sean9892 was quicker to find the actual best based on the fact MT19937 is circular. Understanding about the circular part, <a href="https://github.com/soon-haari/my-ctf-challenges/tree/main/2025-hammingdiet/solve/reduced.py" target="_blank" rel="noopener">reduced.py</a> will be helpful.
+    </p>
+
+    <img src="../files/hamstatic/bits.png" alt="" width=600px>
+
+    <p class="justify">
+        It can be easily found that that constant has a deep relation with the twist constant 0x9908b0df.
+    </p>
+    <p class="justify">
+        sean9892 elaborated by saying: After noticing the twist was kind of a Quotient Ring over F2, using xbar^-2 was helpful.
+    </p>
+
+    <img src="../files/hamstatic/cmp.png" class="cmp" alt="" width=600px>
+
+    <p class="justify">
+        One funny thing is that, the constant 0x6422c37e is only related to 0x9908b0df and nothing related to the tempering algorithm. However when I checked the best possible result from inverting those initial values, 0x80000000 had actually around 10000 bit advantage when it was pre-tempered instead. Check out <a href="https://github.com/soon-haari/my-ctf-challenges/tree/main/2025-hammingdiet/solve/compare.py" target="_blank" rel="noopener">compare.py</a>.
+    </p>
+
+    <p class="justify">
+        There is no guarantee that 1586822 is the best possible score, so it would be awesome if you manage to find a better one and share me or release it somewhere.
+    </p>
+
+    <p class="justify">
+        Merry Christmas and a happy new year.
+    </p>
+
+    <br><br><br><br><br><br><br><br>
+
+    </main>
+
+</body>
+</html>
