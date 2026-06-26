@@ -5,12 +5,7 @@ title: me.soon.haari
 
 <font size="5em">Me. soon_haari.</font>
 
-My name is Minsun Kim(김민순), and I am a 21 years old undergraduate student. Actively playing CTFs with [bingus](https://ctftime.org/team/154656), or when I feel like it.
-
-<br>
-🎓:
-- Korea University (2022 ~ )
-<br>
+I'm Minsun Kim(김민순), and I am a 22 yo student. Playing CTFs with [bingus](https://ctftime.org/team/154656), or when I feel like it. Currently at [OtterSec](https://osec.io/).
 
 Contact:
 - [soon@haari.me](mailto:soon@haari.me)
@@ -18,7 +13,9 @@ Contact:
 - [X(Twitter)](https://x.com/ah_p_uh)
 
 Experiences:
-- [Zellic](https://www.zellic.io/) Zero-Knowledge Internship 
+- [zkSecurity](https://zksecurity.xyz/) Cryptography Internship 
+	- (2026.03 ~ 2026.05)
+- [Zellic](https://www.zellic.io/) Cryptography Internship 
 	- (2024.04 ~ 2025.06)
 - [Theori](https://theori.io/) Dreamhack Contents Internship
 	- (2023.09 ~ 2024.02)
@@ -26,15 +23,12 @@ Experiences:
 <br>
 
 Organized CTFs:
-- 2023 Christmas CTF
-- 2024 .HACK(Dreamhack Invitational)
-- 2024 Cyber Conflict Exercise
 - 2024 Codegate CTF
 - 2024 Blue Water CTF
-- 2025 Codegate CTF
+- 2026 KalmarCTF
 - [My CTF challenges](https://github.com/soon-haari/my-ctf-challenges)
 
-<span style="font-size:80%; line-height:1.3; display:inline-block;">
+<pre class="profile-ascii-art" aria-hidden="true">
 ⠀⢀⡀⠤⠠⠄⠀⠀⠀⠀⠀⠀⠀⠀⠠⠤⠀⠀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⢀⣀⡀⠀⡀⢀⠀⢀⣀⠀⠀⠀⠀⠀⠀
 ⢠⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠁⠒⠤⠤⠐⠂⠈⠉⠉⠁⠉⠈⠀⠉⠈⠁⠉⠀⠉⠈⠉⠀⠒⠀⠤⠤⠐⠂⠈⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠑⢄⠀⠀⠀
 ⢸⠀⠀⠀⢶⣄⡠⠤⠤⠒⠒⠒⠂⠤⠤⠤⠤⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⡀⣀⣀⣀⣀⡀⡄⣀⣀⠀⠀⢨⡄⠀⠀
@@ -70,4 +64,4 @@ Organized CTFs:
 ⠀⢸⠀⠀⠀⢻⣯⡑⢦⠱⢌⠦⡘⢤⠣⢜⡠⠓⡄⢣⠘⡄⠣⢌⠱⣈⢆⢣⡙⡆⣏⢮⣙⢧⡻⣜⢯⣞⣵⣻⣼⣳⢿⣹⡽⣯⣟⣯⣏⢿⢲⢻⠶⣿⣆⠀⠀⠀⠙⢄⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⢇⠀⠀⠈⣿⣘⢦⢫⡜⢦⣙⢦⡛⣤⢣⡙⡔⢣⠱⣌⠓⣌⠓⣌⢎⢦⡹⣜⠼⣎⡽⣎⢷⣹⢾⡽⣞⣷⣯⣿⣻⣯⣿⣳⣟⡾⣼⢛⡎⢧⢻⣦⣽⣶⡄⠀⠀⠀⠑⠦⡀⠀⠀⠀⠀
 ⠀⠀⠘⡄⠀⠀⢸⣿⢺⣇⡻⣼⢸⢶⣙⢦⡳⣜⡜⣣⠳⣬⠹⣌⣛⡜⣮⢖⣳⣭⣟⢾⡵⣯⢿⡽⣯⣿⣟⣷⣿⣿⣿⢿⣿⣿⣞⡷⣍⠞⡬⢣⢃⠞⣷⣿⣿⣤⡀⠀⠀⠀⠈⠓⠄⡀⠀
-</span>
+</pre>
